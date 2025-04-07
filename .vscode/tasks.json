@@ -1,0 +1,23 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Hotel Reservation App",
+        "type": "shell",
+        "command": "g++",
+        "args": [
+          "-std=c++11",
+          "-Iheaders",
+          "-o", "hotel_app",
+          "src/main.cpp",
+          "src/app.cpp"
+        ],
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        },
+        "problemMatcher": []
+      }
+    ]
+  }
+  
