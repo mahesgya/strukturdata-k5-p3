@@ -30,7 +30,9 @@ std::string IOHelper::getLineInput(const std::string &prompt, bool clearBuffer) 
     std::string input;
 
     std::cout << prompt;
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
+    if (clearBuffer) {
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
     std::getline(std::cin, input);
 
     return input;

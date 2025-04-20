@@ -34,6 +34,8 @@ void App::displayMainMenu(Auth &auth)
   int choice;
   std::cin >> choice;
 
+  std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
   switch (choice)
   {
   case 1:
@@ -54,12 +56,16 @@ void App::displayMainMenu(Auth &auth)
 void App::handleCustomerLogin(Auth &auth)
 {
   std::string phone;
+  
+  // Bersihkan buffer di awal jika perlu (jika ada input yang tersisa)
+  if (std::cin.rdbuf()->in_avail() > 0) {
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+  }
 
   do
   {
     std::cout << "Masukkan nomor telepon: ";
-    std::cin.ignore();
-    std::getline(cin, phone);
+    std::getline(std::cin, phone);
 
     if (!isValidPhoneNumber(phone))
     {
@@ -71,11 +77,10 @@ void App::handleCustomerLogin(Auth &auth)
   // Cek apakah user sudah terdaftar
   if (auth.findUserByPhone(phone) == nullptr)
   {
-    // User belum terdaftar, minta nama dan nomor telfon
+    // User belum terdaftar, minta nama dan nomor telepon
+    std::cout << "Nomor belum terdaftar silahkan mendaftar akun." << "\n" << "Masukkan Nama Anda: ";
+
     std::string name;
-    std::cout << "Nomor belum terdaftar silahkan mendaftar akun." << "\n"
-              << "Masukkan Nama Anda: ";
-    std::cin.ignore();
     std::getline(std::cin, name);
 
     std::string phoneRegister;
@@ -83,8 +88,7 @@ void App::handleCustomerLogin(Auth &auth)
     do
     {
       std::cout << "Masukkan nomor telepon: ";
-      std::cin.ignore();
-      std::getline(cin, phoneRegister);
+      std::getline(std::cin, phoneRegister);
 
       if (!isValidPhoneNumber(phoneRegister))
       {
@@ -92,7 +96,6 @@ void App::handleCustomerLogin(Auth &auth)
       }
 
     } while (!isValidPhoneNumber(phoneRegister));
-
 
     // Register dan login
     if (auth.loginOrRegister(phoneRegister, name))
@@ -172,6 +175,7 @@ void App::displayUserMenu(Auth &auth)
     break;
   case 4:
     std::cout << "Logout berhasil!" << std::endl;
+    displayMainMenu(auth);
     break;
   default:
     std::cout << "Pilihan tidak valid!" << std::endl;
@@ -179,5 +183,5 @@ void App::displayUserMenu(Auth &auth)
     break;
   }
 
-  displayMainMenu(auth); // Kembali ke menu utama setelah selesai
+  displayUserMenu(auth); // Kembali ke menu utama setelah selesai
 }
