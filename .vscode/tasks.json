@@ -10,7 +10,9 @@
           "-Iheaders",
           "-o", "hotel_app",
           "src/main.cpp",
-          "src/app.cpp"
+          "src/app.cpp",
+          "src/user.cpp",
+          "src/auth.cpp"
         ],
         "group": {
           "kind": "build",
