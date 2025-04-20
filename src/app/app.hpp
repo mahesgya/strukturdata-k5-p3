@@ -1,7 +1,7 @@
 #ifndef APP_HPP
 #define APP_HPP
 
-#include "auth.hpp"
+#include "../auth/auth.hpp"
 
 class App {
     public: 

@@ -2,7 +2,7 @@
 #include <fstream>
 #include <sstream>
 
-#include "../headers/auth.hpp"
+#include "./auth.hpp"
 
 Auth::Auth()
 {
@@ -12,7 +12,7 @@ Auth::Auth()
     // Load users dari database
     if (!loadUsersFromFile())
     {
-       std::cerr << "Error: Failed to load user database." << std::endl;
+        std::cerr << "Error: Failed to load user database." << std::endl;
     }
 }
 

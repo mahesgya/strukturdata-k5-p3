@@ -2,13 +2,14 @@
 #include <cstdlib> 
 #include <limits>
 
-#include "../headers/app.hpp"
-#include "../headers/user.hpp"
-#include "../headers/auth.hpp"
+#include "./app.hpp"
+#include "../user/user.hpp"
+#include "../auth/auth.hpp"
+#include "../utils/phone_validator/phone_validator.hpp"
 
 using namespace std;
 
-void App::run() { // Hapus semicolon di sini
+void App::run() { 
     Auth authSystem;
 
     bool isRunning = true;
@@ -65,6 +66,7 @@ void App::handleCustomerLogin(Auth &auth)
   std::string phone;
   std::cout << "Masukkan nomor telepon: ";
   std::cin >> phone;
+
 
   // Cek apakah user sudah terdaftar
   if (auth.findUserByPhone(phone) == nullptr)
