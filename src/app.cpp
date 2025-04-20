@@ -69,14 +69,19 @@ void App::handleCustomerLogin(Auth &auth)
   // Cek apakah user sudah terdaftar
   if (auth.findUserByPhone(phone) == nullptr)
   {
-    // User belum terdaftar, minta nama
+    // User belum terdaftar, minta nama dan nomor telfon
     std::string name;
-    std::cout << "Nomor belum terdaftar. Masukkan nama Anda untuk membuat akun: ";
+    std::cout << "Nomor belum terdaftar." << "\n" << "Masukkan Nama Anda: ";
     std::cin.ignore(); // Clear buffer
     std::getline(std::cin, name);
 
+    std::string phoneRegister;
+    std::cout << "Masukkan No Telfon Anda: ";
+    std::cin.ignore();
+    std::getline(cin, phoneRegister);
+
     // Register dan login
-    if (auth.loginOrRegister(phone, name))
+    if (auth.loginOrRegister(phoneRegister, name))
     {
       cls();
       std::cout << "Akun baru berhasil dibuat!" << std::endl;
