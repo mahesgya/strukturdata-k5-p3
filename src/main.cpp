@@ -1,4 +1,4 @@
-#include "app.hpp"
+#include "../headers/app.hpp"
 
 int main() {
     App app;
