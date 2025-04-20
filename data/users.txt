@@ -1,1 +1,3 @@
+// User database - Format: name,phone
 nopal,0908988
+rgy,08797392819

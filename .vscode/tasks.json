@@ -13,7 +13,8 @@
           "src/app/app.cpp",
           "src/user/user.cpp",
           "src/auth/auth.cpp",
-          "src/utils/phone_validator/phone_validator.cpp"
+          "src/utils/phone_validator/phone_validator.cpp",
+          "src/utils/io_helper/io_helper.cpp"
         ],
         "group": {
           "kind": "build",

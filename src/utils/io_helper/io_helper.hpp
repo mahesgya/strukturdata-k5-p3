@@ -1,9 +1,15 @@
 #ifndef IO_HELPER_HPP
 #define IO_HELPER_HPP
 
-namespace IOHelper{
-    void cls();
-    void pause();
-}
+#include <string>
+#include <limits>
+#include <iostream>
 
-#endif
+class IOHelper{
+    public: 
+        static void cls();
+        static void pause();
+        static std::string getLineInput(const std::string &prompt, bool clearBuffer = true);
+};
+
+#endif      
