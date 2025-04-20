@@ -1,5 +1,5 @@
 #include <iostream>
-#include <cstdlib> 
+#include <cstdlib>
 #include <limits>
 
 #include "./app.hpp"
@@ -9,19 +9,20 @@
 
 using namespace std;
 
-void App::run() { 
-    Auth authSystem;
+void App::run()
+{
+  Auth authSystem;
 
-    bool isRunning = true;
-    while (isRunning)
-    {
-      displayMainMenu(authSystem);
-    }
+  bool isRunning = true;
+  while (isRunning)
+  {
+    displayMainMenu(authSystem);
+  }
 }
 
 void App::cls()
 {
-  system("cls"); 
+  system("cls");
 }
 
 void App::pause()
@@ -64,30 +65,52 @@ void App::displayMainMenu(Auth &auth)
 void App::handleCustomerLogin(Auth &auth)
 {
   std::string phone;
-  std::cout << "Masukkan nomor telepon: ";
-  std::cin >> phone;
 
+  do
+  {
+    std::cout << "Masukkan nomor telepon: ";
+    std::cin.ignore();
+    std::getline(cin, phone);
+
+    if (!isValidPhoneNumber(phone))
+    {
+      std::cout << "Nomor tidak valid! Coba lagi.\n\n";
+    }
+
+  } while (!isValidPhoneNumber(phone));
 
   // Cek apakah user sudah terdaftar
   if (auth.findUserByPhone(phone) == nullptr)
   {
     // User belum terdaftar, minta nama dan nomor telfon
     std::string name;
-    std::cout << "Nomor belum terdaftar." << "\n" << "Masukkan Nama Anda: ";
+    std::cout << "Nomor belum terdaftar silahkan mendaftar akun." << "\n"
+              << "Masukkan Nama Anda: ";
     std::cin.ignore(); // Clear buffer
     std::getline(std::cin, name);
 
     std::string phoneRegister;
-    std::cout << "Masukkan No Telfon Anda: ";
-    std::cin.ignore();
-    std::getline(cin, phoneRegister);
+
+    do
+    {
+      std::cout << "Masukkan nomor telepon: ";
+      std::cin.ignore();
+      std::getline(cin, phoneRegister);
+
+      if (!isValidPhoneNumber(phoneRegister))
+      {
+        std::cout << "Nomor tidak valid! Coba lagi.\n\n";
+      }
+
+    } while (!isValidPhoneNumber(phoneRegister));
+
 
     // Register dan login
     if (auth.loginOrRegister(phoneRegister, name))
     {
       cls();
       std::cout << "Akun baru berhasil dibuat!" << std::endl;
-      pause(); 
+      pause();
       displayUserMenu(auth);
     }
   }
@@ -107,25 +130,24 @@ void App::handleCustomerLogin(Auth &auth)
 
 void App::handleAdminLogin()
 {
-    std::string phone, password;
-    std::cout << "Masukkan username admin: ";
-    std::cin >> phone;
-    std::cout << "Masukkan password: ";
-    std::cin >> password;
-  
-    Auth auth; // Create auth instance or pass it as parameter
-    if (auth.loginAdmin(phone, password))
-    {
-      cls();
-      std::cout << "Login admin berhasil!" << std::endl;
-      pause();
-     
-    }
-    else
-    {
-      std::cout << "Login gagal! Username atau password salah." << std::endl;
-      pause();
-    }
+  std::string phone, password;
+  std::cout << "Masukkan username admin: ";
+  std::cin >> phone;
+  std::cout << "Masukkan password: ";
+  std::cin >> password;
+
+  Auth auth; // Create auth instance or pass it as parameter
+  if (auth.loginAdmin(phone, password))
+  {
+    cls();
+    std::cout << "Login admin berhasil!" << std::endl;
+    pause();
+  }
+  else
+  {
+    std::cout << "Login gagal! Username atau password salah." << std::endl;
+    pause();
+  }
 }
 
 void App::displayUserMenu(Auth &auth)
@@ -147,7 +169,7 @@ void App::displayUserMenu(Auth &auth)
   case 1:
     cls();
     auth.getCurrentUser()->viewRoom();
-    pause(); 
+    pause();
     break;
   case 2:
     cls();
@@ -164,7 +186,7 @@ void App::displayUserMenu(Auth &auth)
     break;
   default:
     std::cout << "Pilihan tidak valid!" << std::endl;
-    pause(); 
+    pause();
     break;
   }
 

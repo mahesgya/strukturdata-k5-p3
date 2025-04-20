@@ -148,7 +148,7 @@ bool Auth::isUserLoggedIn() const
 bool Auth::isAdmin() const
 {
     return isLoggedIn && currentUser != nullptr &&
-           currentUser->getPhoneNumber() == ADMIN_PHONE;
+            currentUser->getPhoneNumber() == ADMIN_PHONE;
 }
 
 User *Auth::findUserByPhone(const std::string &phone)

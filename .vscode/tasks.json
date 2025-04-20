@@ -10,9 +10,10 @@
           "-Iheaders",
           "-o", "hotel_app",
           "src/main.cpp",
-          "src/app.cpp",
-          "src/user.cpp",
-          "src/auth.cpp"
+          "src/app/app.cpp",
+          "src/user/user.cpp",
+          "src/auth/auth.cpp",
+          "src/utils/phone_validator/phone_validator.cpp"
         ],
         "group": {
           "kind": "build",
