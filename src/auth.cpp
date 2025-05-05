@@ -9,8 +9,8 @@ Auth::Auth()
     currentUser = nullptr;
     isLoggedIn = false;
 
-    // Load users dari database
-    if (!loadUsersFromFile())
+    // Load users
+    if (!loadUsers())
     {
        std::cerr << "Error: Failed to load user database." << std::endl;
     }
@@ -18,7 +18,6 @@ Auth::Auth()
 
 Auth::~Auth()
 {
-    // Bersihkan memory
     for (auto &user : users)
     {
         delete user;
@@ -26,7 +25,7 @@ Auth::~Auth()
     users.clear();
 }
 
-bool Auth::loadUsersFromFile()
+bool Auth::loadUsers()
 {
     std::ifstream file(userDbPath);
     if (!file.is_open())
@@ -37,18 +36,18 @@ bool Auth::loadUsersFromFile()
 
     for (auto &user : users)
     {
-        delete user; // Hapus user yang ada di memory
+        delete user; 
     }
-    users.clear(); // Kosongkan vector users
+    users.clear(); 
 
-    // Format file: name,phone
+    // Format: name,phone
     std::string line;
     while (std::getline(file, line))
     {
         if (line.empty() || line[0] == '#')
-            continue; // Skip empty lines and comments
+            continue; 
 
-        // Parse CSV (name,phone)
+
         size_t commaPos = line.find(',');
         if (commaPos != std::string::npos)
         {
@@ -66,7 +65,7 @@ bool Auth::loadUsersFromFile()
     return true;
 }
 
-bool Auth::saveUsersToFile()
+bool Auth::saveUsers()
 {
     std::ofstream file(userDbPath);
     if (!file.is_open())
@@ -75,7 +74,6 @@ bool Auth::saveUsersToFile()
         return false;
     }
 
-    file << "// User database - Format: name,phone" << std::endl;
     for (auto &user : users)
     {
         if (user->getPhoneNumber() != ADMIN_PHONE)
@@ -91,12 +89,11 @@ bool Auth::saveUsersToFile()
 
 bool Auth::loginOrRegister(const std::string &phone, const std::string &name)
 {
-    // Coba cari user berdasarkan nomor telepon
+    // Cari nomor user
     User *user = findUserByPhone(phone);
 
     if (user != nullptr)
     {
-        // User ditemukan, langsung login
         currentUser = user;
         isLoggedIn = true;
         std::cout << "Selamat datang kembali, " << user->getName() << "!" << std::endl;
@@ -104,20 +101,17 @@ bool Auth::loginOrRegister(const std::string &phone, const std::string &name)
     }
     else if (!name.empty())
     {
-        // User tidak ditemukan tapi nama disediakan, buat user baru
         User *newUser = new User(name, phone);
         users.push_back(newUser);
         currentUser = newUser;
         isLoggedIn = true;
 
-        // Simpan perubahan database
-        saveUsersToFile();
+        saveUsers();
 
         std::cout << "Akun baru dibuat: " << name << " (" << phone << ")" << std::endl;
         return true;
     }
 
-    // User tidak ditemukan dan nama tidak disediakan
     std::cout << "Nomor telepon " << phone << " belum terdaftar." << std::endl;
     return false;
 }
@@ -126,7 +120,6 @@ bool Auth::loginAdmin(const std::string &phone, const std::string &password)
 {
     if (phone == ADMIN_PHONE && password == ADMIN_PASSWORD)
     {
-        // Login as admin (simplified version)
         currentUser = new User("Administrator", phone);
         isLoggedIn = true;
         std::cout << "Login admin berhasil!" << std::endl;

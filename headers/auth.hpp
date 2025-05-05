@@ -8,7 +8,7 @@
 class Auth
 {
 private:
-    std::string userDbPath = "data/users.txt"; // Path to user database file
+    std::string userDbPath = "data/users.txt"; 
 
     std::vector<User *> users;
     User *currentUser;
@@ -21,14 +21,14 @@ public:
     Auth();
     ~Auth();
 
-    // Database Management
-    bool saveUsersToFile();
-    bool loadUsersFromFile();
+    // Management
+    bool saveUsers();
+    bool loadUsers();
 
-    // User login/registration
+    // login / Regist
     bool loginOrRegister(const std::string &phone, const std::string &name = "");
 
-    // Admin login
+    // login Admin
     bool loginAdmin(const std::string &phone, const std::string &password);
 
     // User management
@@ -36,7 +36,6 @@ public:
     bool isUserLoggedIn() const;
     bool isAdmin() const;
 
-    // Helper methods
     User *findUserByPhone(const std::string &phone);
 };
 

@@ -8,7 +8,7 @@
 
 using namespace std;
 
-void App::run() { // Hapus semicolon di sini
+void App::run() { 
     Auth authSystem;
 
     bool isRunning = true;
@@ -66,16 +66,14 @@ void App::handleCustomerLogin(Auth &auth)
   std::cout << "Masukkan nomor telepon: ";
   std::cin >> phone;
 
-  // Cek apakah user sudah terdaftar
   if (auth.findUserByPhone(phone) == nullptr)
   {
-    // User belum terdaftar, minta nama
+    // User belum terdaftar
     std::string name;
     std::cout << "Nomor belum terdaftar. Masukkan nama Anda untuk membuat akun: ";
-    std::cin.ignore(); // Clear buffer
+    std::cin.ignore(); 
     std::getline(std::cin, name);
 
-    // Register dan login
     if (auth.loginOrRegister(phone, name))
     {
       cls();
@@ -86,7 +84,7 @@ void App::handleCustomerLogin(Auth &auth)
   }
   else
   {
-    // User sudah terdaftar, langsung login
+    // User terdaftar
     if (auth.loginOrRegister(phone))
     {
       cls();
@@ -101,12 +99,12 @@ void App::handleCustomerLogin(Auth &auth)
 void App::handleAdminLogin()
 {
     std::string phone, password;
-    std::cout << "Masukkan username admin: ";
+    std::cout << "Masukkan nomor admin: ";
     std::cin >> phone;
     std::cout << "Masukkan password: ";
     std::cin >> password;
   
-    Auth auth; // Create auth instance or pass it as parameter
+    Auth auth; 
     if (auth.loginAdmin(phone, password))
     {
       cls();
@@ -126,15 +124,14 @@ void App::displayUserMenu(Auth &auth)
   cls();
   std::cout << "=== MENU USER ===" << std::endl;
   std::cout << "1. Lihat Jadwal Tersedia" << std::endl;
-  std::cout << "2. Buat Booking" << std::endl;
-  std::cout << "3. Cancel Booking" << std::endl;
+  std::cout << "2. Buat Reservasi" << std::endl;
+  std::cout << "3. Cancel Reservasi" << std::endl;
   std::cout << "4. Logout" << std::endl;
   std::cout << "Pilihan: ";
 
   int choice;
   std::cin >> choice;
 
-  // Process user selection
   switch (choice)
   {
   case 1:
@@ -144,12 +141,12 @@ void App::displayUserMenu(Auth &auth)
     break;
   case 2:
     cls();
-    auth.getCurrentUser()->makeBooking();
+    auth.getCurrentUser()->makeReservation();
     pause();
     break;
   case 3:
     cls();
-    auth.getCurrentUser()->cancelBooking();
+    auth.getCurrentUser()->cancelReservation();
     pause();
     break;
   case 4:
@@ -161,5 +158,5 @@ void App::displayUserMenu(Auth &auth)
     break;
   }
 
-  displayMainMenu(auth); // Kembali ke menu utama setelah selesai
+  displayMainMenu(auth);
 }
