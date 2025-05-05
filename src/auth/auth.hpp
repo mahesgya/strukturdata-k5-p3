@@ -3,7 +3,7 @@
 
 #include <string>
 #include <vector>
-#include "user.hpp"
+#include "../user/user.hpp"
 
 class Auth
 {

@@ -2,7 +2,7 @@
 #include <fstream>
 #include <sstream>
 
-#include "../headers/auth.hpp"
+#include "./auth.hpp"
 
 Auth::Auth()
 {
@@ -12,7 +12,7 @@ Auth::Auth()
     // Load users dari database
     if (!loadUsersFromFile())
     {
-       std::cerr << "Error: Failed to load user database." << std::endl;
+        std::cerr << "Error: Failed to load user database." << std::endl;
     }
 }
 
@@ -148,7 +148,7 @@ bool Auth::isUserLoggedIn() const
 bool Auth::isAdmin() const
 {
     return isLoggedIn && currentUser != nullptr &&
-           currentUser->getPhoneNumber() == ADMIN_PHONE;
+            currentUser->getPhoneNumber() == ADMIN_PHONE;
 }
 
 User *Auth::findUserByPhone(const std::string &phone)
