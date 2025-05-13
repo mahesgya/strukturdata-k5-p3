@@ -1,25 +1,27 @@
 {
-    "version": "2.0.0",
-    "tasks": [
-      {
-        "label": "Hotel Reservation App",
-        "type": "shell",
-        "command": "g++",
-        "args": [
-          "-std=c++11",
-          "-Iheaders",
-          "-o", "hotel_app",
-          "src/main.cpp",
-          "src/app.cpp",
-          "src/user.cpp",
-          "src/auth.cpp"
-        ],
-        "group": {
-          "kind": "build",
-          "isDefault": true
-        },
-        "problemMatcher": []
-      }
-    ]
-  }
-  
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Hotel Reservation App",
+      "type": "shell",
+      "command": "g++",
+      "args": [
+        "-std=c++11",
+        "-Iheaders",
+        "-o",
+        "hotel_app",
+        "src/main.cpp",
+        "src/app/app.cpp",
+        "src/user/user.cpp",
+        "src/auth/auth.cpp",
+        "src/utils/phone_validator/phone_validator.cpp",
+        "src/utils/io_helper/io_helper.cpp"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    }
+  ]
+}

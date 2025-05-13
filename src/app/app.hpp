@@ -1,7 +1,7 @@
-#ifndef APP_HPP
-#define APP_HPP
+#ifndef APP_H
+#define APP_H
 
-#include "auth.hpp"
+#include "../auth/auth.hpp"
 
 class App {
     public: 
@@ -11,8 +11,7 @@ class App {
     void handleAdminLogin();
     void displayMainMenu(Auth &auth);
     void displayUserMenu(Auth &auth);
-    void cls();
-    void pause();
+
 };
 
 #endif
