@@ -1,5 +1,5 @@
-#ifndef APP_HPP
-#define APP_HPP
+#ifndef APP_H
+#define APP_H
 
 #include "../auth/auth.hpp"
 
