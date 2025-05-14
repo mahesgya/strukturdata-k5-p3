@@ -21,6 +21,7 @@ public:
     void viewRoom() const;
     void makeBooking() const;
     void cancelBooking() const;
+    
     void addRoom();
     void editRoom();
     void deleteRoom();
