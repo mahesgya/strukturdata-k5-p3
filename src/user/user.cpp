@@ -1,5 +1,6 @@
 #include "./user.hpp"
 #include <iostream>
+#include <iomanip>
 
 User::User(const std::string &name, const std::string &phone)
     : name(name), phoneNumber(phone), roomManager("data/rooms.csv")
@@ -83,7 +84,7 @@ void User::editRoom()
         std::cout << "Data kamar berhasil diubah dengan rincian sebagai berikut: " << std::endl;
         std::cout << "ID Kamar: " << roomId << std::endl;
         std::cout << "Tipe Kamar: " << roomType << std::endl;
-        std::cout << "Harga Kamar: " << roomPrice << std::endl;
+        std::cout << "Harga Kamar: " << std::fixed << std::setprecision(0) << roomPrice << std::endl;
     } else {
         std::cout << "Data kamar gagal diubah." << std::endl;
     }
