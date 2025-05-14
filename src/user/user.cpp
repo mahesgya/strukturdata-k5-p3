@@ -35,6 +35,9 @@ void User::cancelBooking() const
 
 void User::addRoom() 
 {
+    std::cout << "=== TAMBAH KAMAR BARU ===" << std::endl;
+    std::cout << "=======================" << std::endl;
+
     std::string roomType;
     double roomPrice;
 
@@ -57,8 +60,35 @@ void User::addRoom()
 void User::editRoom() 
 {
     std::cout << "=== EDIT KAMAR ===" << std::endl;
-    std::cout << "=======================" << std::endl;
+    std::cout << "=======================" << std::endl << std::endl;
+    
+
+    int roomId;
+    std::string roomType;
+    double roomPrice;
+    
+    std::cout << "Silakan masukkan ID kamar yang ingin diedit: " << std::endl;
+    std::cout << "ID Kamar: ";
+    std::cin >> roomId;
+    std::cout << std::endl;
+
+    std::cout << "Silakan masukkan data baru yang diperlukan: " << std::endl;
+    std::cout << "Tipe Kamar baru: ";
+    std::cin >> roomType;
+    std::cout << "Harga per malam baru: ";
+    std::cin >> roomPrice;
+    std::cout << std::endl;
+
+    if (roomManager.editRoom(roomId, roomType, roomPrice)) {
+        std::cout << "Data kamar berhasil diubah dengan rincian sebagai berikut: " << std::endl;
+        std::cout << "ID Kamar: " << roomId << std::endl;
+        std::cout << "Tipe Kamar: " << roomType << std::endl;
+        std::cout << "Harga Kamar: " << roomPrice << std::endl;
+    } else {
+        std::cout << "Data kamar gagal diubah." << std::endl;
+    }
 }
+
 
 void User::deleteRoom() 
 {
