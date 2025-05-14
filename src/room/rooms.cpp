@@ -76,3 +76,46 @@ void RoomManager::showAllRooms() const {
     std::cout << "--------------------------------" << std::endl;
 }
 
+bool RoomManager::addRoom(const std::string& type, double price) {
+    int newId = getNextRoomId();
+    
+    Room kamarBaru;
+    kamarBaru.id = newId;
+    kamarBaru.type = type;
+    kamarBaru.price = price;
+    kamarBaru.status = "Available";
+    
+    rooms.push_back(kamarBaru);
+    return saveRoomsToCSV();
+}
+
+bool RoomManager::editRoom(int roomId, const std::string& type, double price) {
+    for (auto& room : rooms) {
+        if (room.id == roomId) {
+            room.type = type;
+            room.price = price;
+            return saveRoomsToCSV();
+        }
+    }
+    return false;
+}
+
+bool RoomManager::deleteRoom(int roomId) {
+    for (auto it = rooms.begin(); it != rooms.end(); ++it) {
+        if (it->id == roomId) {
+            rooms.erase(it);
+            return saveRoomsToCSV();
+        }
+    }
+    return false;
+}
+
+int RoomManager::getNextRoomId() const {
+    int maxId = 0;
+    for (const auto& room : rooms) {
+        if (room.id > maxId) {
+            maxId = room.id;
+        }
+    }
+    return maxId + 1;
+}
