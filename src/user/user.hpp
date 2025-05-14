@@ -2,12 +2,14 @@
 #define USER_H
 
 #include <string>
+#include "../room/rooms.hpp"
 
 class User
 {
 private:
     std::string name;
     std::string phoneNumber;
+    RoomManager roomManager; 
 
 public:
     User(const std::string &name, const std::string &phone);
