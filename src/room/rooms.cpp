@@ -43,22 +43,6 @@ bool RoomManager::loadRoomsFromCSV() {
 }
 
 
-bool RoomManager::saveRoomsToCSV() const {
-    std::ofstream file(filename);
-    
-    if (!file.is_open()) {
-        std::cerr << "Error: Tidak dapat membuka file " << filename << " untuk input data" << std::endl;
-        return false;
-    }
-    
-    for (const auto& room : rooms) {
-        file << room.id << "," << room.type << "," << room.price << "," << room.status << std::endl;
-    }
-    
-    file.close();
-    return true;
-}
-
 void RoomManager::showAllRooms() const {
     if (rooms.empty()) {
         std::cout << "Tidak ada kamar yang tersedia." << std::endl;
@@ -75,41 +59,4 @@ void RoomManager::showAllRooms() const {
                   << room.price << " | " << room.status << std::endl;
     }
     std::cout << "--------------------------------" << std::endl;
-}
-
-Room* RoomManager::findRoomById(int id) {
-    for (auto& room : rooms) {
-        if (room.id == id) {
-            return &room;
-        }
-    }
-    return nullptr;  
-}
-
-std::vector<Room> RoomManager::getAvailableRooms() const {
-    std::vector<Room> availableRooms;
-    
-    for (const auto& room : rooms) {
-        if (room.status == "available") {
-            availableRooms.push_back(room);
-        }
-    }
-    
-    return availableRooms;
-}
-
-bool RoomManager::updateRoomStatus(int id, const std::string& newStatus) {
-    Room* room = findRoomById(id);
-    
-    if (room == nullptr) {
-        return false;  
-    }
-    
-    room->status = newStatus;
-    saveRoomsToCSV();
-    return true;
-}
-
-const std::vector<Room>& RoomManager::getAllRooms() const {
-    return rooms;
 }
