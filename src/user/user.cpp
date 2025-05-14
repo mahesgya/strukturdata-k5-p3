@@ -37,7 +37,7 @@ void User::cancelBooking() const
 void User::addRoom() 
 {
     std::cout << "=== TAMBAH KAMAR BARU ===" << std::endl;
-    std::cout << "=======================" << std::endl;
+    std::cout << "=======================" << std::endl << std::endl;
 
     std::string roomType;
     double roomPrice;
@@ -94,5 +94,19 @@ void User::editRoom()
 void User::deleteRoom() 
 {
     std::cout << "=== DELETE KAMAR ===" << std::endl;
-    std::cout << "=======================" << std::endl;
+    std::cout << "=======================" << std::endl << std::endl;
+
+    int roomId;
+    
+    std::cout << "Silakan masukkan ID kamar yang ingin dihapus: " << std::endl;
+    std::cout << "ID Kamar: ";
+    std::cin >> roomId;
+    std::cout << std::endl;
+
+    if (roomManager.deleteRoom(roomId)) {
+        std::cout << "Data kamar berhasil dihapus: " << std::endl;
+        std::cout << "ID Kamar: " << roomId << std::endl;
+    } else {
+        std::cout << "Data kamar gagal dihapus." << std::endl;
+    }
 }
