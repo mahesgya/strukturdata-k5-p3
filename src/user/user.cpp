@@ -2,9 +2,9 @@
 #include <iostream>
 
 User::User(const std::string &name, const std::string &phone)
-    : name(name), phoneNumber(phone), roomManager("data/rooms.csv") 
-{}
-
+    : name(name), phoneNumber(phone), roomManager("data/rooms.csv")
+{
+}
 
 std::string User::getName() const
 {
@@ -17,7 +17,7 @@ std::string User::getPhoneNumber() const
 }
 
 void User::viewRoom() const
-{  
+{
     roomManager.showAllRooms();
 }
 
@@ -27,25 +27,40 @@ void User::makeBooking() const
     std::cout << "====================" << std::endl;
 }
 
-void User::cancelBooking() const 
+void User::cancelBooking() const
 {
     std::cout << "=== Cancel Booking ===" << std::endl;
     std::cout << "====================" << std::endl;
 }
 
-void User::addRoom() const
+void User::addRoom() 
 {
-    std::cout << "=== TAMBAH KAMAR BARU ===" << std::endl;
-    std::cout << "=======================" << std::endl;
+    std::string roomType;
+    double roomPrice;
+
+    std::cout << "Silahkan Input Data Kamar yang Diperlukan" << std::endl;
+    std::cout << "Tipe Kamar: ";
+    std::cin >> roomType;
+    std::cout << "Harga per Malam: ";
+    std::cin >> roomPrice;
+    std::cout << std::endl;
+
+    if(roomManager.addRoom(roomType, roomPrice)){
+        std::cout << "Data Kamar Baru Berhasil dibuat Dengan Rincian Sebagai Berikut: " << std::endl;
+        std::cout << "Tipe Kamar: " << roomType << std::endl;
+        std::cout << "Harga Kamar: " << roomPrice << std::endl;
+    }else{
+        std::cout << "Data Kamar Baru Gagal dibuat." << std::endl;
+    }
 }
 
-void User::editRoom() const
+void User::editRoom() 
 {
     std::cout << "=== EDIT KAMAR ===" << std::endl;
     std::cout << "=======================" << std::endl;
 }
 
-void User::deleteRoom() const
+void User::deleteRoom() 
 {
     std::cout << "=== DELETE KAMAR ===" << std::endl;
     std::cout << "=======================" << std::endl;
