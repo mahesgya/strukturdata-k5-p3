@@ -126,7 +126,7 @@ bool Auth::loginAdmin(const std::string &phone, const std::string &password)
 {
     if (phone == ADMIN_PHONE && password == ADMIN_PASSWORD)
     {
-        // Login as admin (simplified version)
+        // Login sebagai admin
         currentUser = new User("Administrator", phone);
         isLoggedIn = true;
         std::cout << "Login admin berhasil!" << std::endl;
