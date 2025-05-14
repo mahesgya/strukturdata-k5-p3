@@ -57,7 +57,6 @@ void App::handleCustomerLogin(Auth &auth)
 {
   std::string phone;
   
-  // Bersihkan buffer di awal jika perlu (jika ada input yang tersisa)
   if (std::cin.rdbuf()->in_avail() > 0) {
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
   }
@@ -74,10 +73,8 @@ void App::handleCustomerLogin(Auth &auth)
 
   } while (!isValidPhoneNumber(phone));
 
-  // Cek apakah user sudah terdaftar
   if (auth.findUserByPhone(phone) == nullptr)
   {
-    // User belum terdaftar, minta nama dan nomor telepon
     std::cout << "Nomor belum terdaftar silahkan mendaftar akun." << "\n" << "Masukkan Nama Anda: ";
 
     std::string name;
@@ -97,7 +94,6 @@ void App::handleCustomerLogin(Auth &auth)
 
     } while (!isValidPhoneNumber(phoneRegister));
 
-    // Register dan login
     if (auth.loginOrRegister(phoneRegister, name))
     {
       IOHelper::cls();
@@ -108,7 +104,6 @@ void App::handleCustomerLogin(Auth &auth)
   }
   else
   {
-    // User sudah terdaftar, langsung login
     if (auth.loginOrRegister(phone))
     {
       IOHelper::cls();
@@ -128,13 +123,13 @@ void App::handleAdminLogin()
   std::cout << "Masukkan password: ";
   std::cin >> password;
 
-  Auth auth; // Create auth instance or pass it as parameter
+  Auth auth; 
   if (auth.loginAdmin(phone, password))
   {
     IOHelper::cls();
     std::cout << "Login admin berhasil!" << std::endl;
     IOHelper::pause();
-    displayUserMenu(auth);
+    displayAdminMenu(auth);
   }
   else
   {
@@ -156,7 +151,6 @@ void App::displayUserMenu(Auth &auth)
   int choice;
   std::cin >> choice;
 
-  // Process user selection
   switch (choice)
   {
   case 1:
@@ -201,7 +195,6 @@ void App::displayAdminMenu(Auth &auth)
   int choice;
   std::cin >> choice;
 
-  // Process user selection
   switch (choice)
   {
   case 1:
@@ -211,15 +204,20 @@ void App::displayAdminMenu(Auth &auth)
     break;
   case 2:
     IOHelper::cls();
-    auth.getCurrentUser()->makeBooking();
+    auth.getCurrentUser()->addRoom();
     IOHelper::pause();
     break;
   case 3:
     IOHelper::cls();
-    auth.getCurrentUser()->cancelBooking();
+    auth.getCurrentUser()->editRoom();
     IOHelper::pause();
     break;
   case 4:
+    IOHelper::cls();
+    auth.getCurrentUser()->deleteRoom();
+    IOHelper::pause();
+    break;
+  case 5:
     std::cout << "Logout berhasil!" << std::endl;
     displayMainMenu(auth);
     break;
@@ -229,5 +227,5 @@ void App::displayAdminMenu(Auth &auth)
     break;
   }
 
-  displayUserMenu(auth); 
+  displayAdminMenu(auth); 
 }
