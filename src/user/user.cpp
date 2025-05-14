@@ -36,3 +36,22 @@ void User::cancelBooking() const
     std::cout << "=== Cancel Booking ===" << std::endl;
     std::cout << "====================" << std::endl;
 }
+
+
+void User::addRoom() const
+{
+    std::cout << "=== TAMBAH KAMAR BARU ===" << std::endl;
+    std::cout << "=======================" << std::endl;
+}
+
+void User::editRoom() const
+{
+    std::cout << "=== EDIT KAMAR ===" << std::endl;
+    std::cout << "=======================" << std::endl;
+}
+
+void User::deleteRoom() const
+{
+    std::cout << "=== DELETE KAMAR ===" << std::endl;
+    std::cout << "=======================" << std::endl;
+}

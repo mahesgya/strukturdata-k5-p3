@@ -8,7 +8,7 @@
 class Auth
 {
 private:
-    std::string userDbPath = "data/users.txt"; // Path to user database file
+    std::string userDbPath = "data/users.txt"; 
 
     std::vector<User *> users;
     User *currentUser;
