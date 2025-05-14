@@ -83,7 +83,7 @@ bool RoomManager::addRoom(const std::string& type, double price) {
     kamarBaru.id = newId;
     kamarBaru.type = type;
     kamarBaru.price = price;
-    kamarBaru.status = "Available";
+    kamarBaru.status = "tersedia";
     
     rooms.push_back(kamarBaru);
     return saveRoomsToCSV();
