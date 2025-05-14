@@ -2,10 +2,9 @@
 #include <iostream>
 
 User::User(const std::string &name, const std::string &phone)
-{
-    this->name = name;
-    this->phoneNumber = phone;
-}
+    : name(name), phoneNumber(phone), roomManager("data/rooms.csv") 
+{}
+
 
 std::string User::getName() const
 {
@@ -21,6 +20,7 @@ void User::viewRoom() const
 {
     std::cout << "=== Jadwal Tersedia ===" << std::endl;
     std::cout << "=======================" << std::endl;
+    roomManager.showAllRooms();
 }
 
 void User::makeBooking() const
