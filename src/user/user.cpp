@@ -52,7 +52,7 @@ void User::addRoom()
     if(roomManager.addRoom(roomType, roomPrice)){
         std::cout << "Data Kamar Baru Berhasil dibuat Dengan Rincian Sebagai Berikut: " << std::endl;
         std::cout << "Tipe Kamar: " << roomType << std::endl;
-        std::cout << "Harga Kamar: " << roomPrice << std::endl;
+        std::cout << "Harga Kamar: " << std::fixed << std::setprecision(0) << roomPrice << std::endl;
     }else{
         std::cout << "Data Kamar Baru Gagal dibuat." << std::endl;
     }
