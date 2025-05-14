@@ -20,7 +20,10 @@ public:
     RoomManager(const std::string& dataFile);
 
     bool loadRoomsFromCSV();
+    bool saveRoomsToCSV() const;
+
     void showAllRooms() const;
+
 };
 
 #endif 

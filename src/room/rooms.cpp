@@ -42,6 +42,21 @@ bool RoomManager::loadRoomsFromCSV() {
     return true;
 }
 
+bool RoomManager::saveRoomsToCSV() const {
+    std::ofstream file(filename);
+    
+    if (!file.is_open()) {
+        std::cerr << "Error: Tidak dapat membuka file " << filename << " untuk input data" << std::endl;
+        return false;
+    }
+    
+    for (const auto& room : rooms) {
+        file << room.id << "," << room.type << "," << room.price << "," << room.status << std::endl;
+    }
+    
+    file.close();
+    return true;
+}
 
 void RoomManager::showAllRooms() const {
     if (rooms.empty()) {
@@ -60,3 +75,4 @@ void RoomManager::showAllRooms() const {
     }
     std::cout << "--------------------------------" << std::endl;
 }
+

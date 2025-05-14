@@ -17,9 +17,7 @@ std::string User::getPhoneNumber() const
 }
 
 void User::viewRoom() const
-{
-    std::cout << "=== Jadwal Tersedia ===" << std::endl;
-    std::cout << "=======================" << std::endl;
+{  
     roomManager.showAllRooms();
 }
 
