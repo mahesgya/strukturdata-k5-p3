@@ -7,12 +7,11 @@ class App {
     public: 
         void run();
     private:
-    void handleCustomerLogin(Auth &auth);
-    void handleAdminLogin();
-    void displayMainMenu(Auth &auth);
-    void displayUserMenu(Auth &auth);
-    void displayAdminMenu(Auth &auth);
-
+        void handleCustomerLogin(Auth &auth);
+        void handleAdminLogin();
+        void displayMainMenu(Auth &auth);
+        void displayUserMenu(Auth &auth);
+        void displayAdminMenu(Auth &auth);
 };
 
 #endif

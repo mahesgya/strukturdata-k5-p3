@@ -48,11 +48,12 @@ bool Auth::loadUsersFromFile()
         size_t commaPos = line.find(',');
         if (commaPos != std::string::npos)
         {
+            std::string userId = line.substr(commaPos + 1);
             std::string name = line.substr(0, commaPos);
             std::string phone = line.substr(commaPos + 1);
 
             // Buat user baru
-            User *user = new User(name, phone);
+            User *user = new User(userId, name, phone);
             users.push_back(user);
         }
     }
@@ -71,12 +72,11 @@ bool Auth::saveUsersToFile()
         return false;
     }
 
-    file << "// User database - Format: name,phone" << std::endl;
     for (auto &user : users)
     {
         if (user->getPhoneNumber() != ADMIN_PHONE)
         { 
-            file << user->getName() << "," << user->getPhoneNumber() << std::endl;
+            file << user-> getUserId() << user->getName() << "," << user->getPhoneNumber() << std::endl;
         }
     }
 

@@ -16,7 +16,28 @@ struct Reservation {
 };
 
 class ReservationManager{
-
+    private:
+        std::vector<Reservation> reservations;
+        std::string filename;
+        RoomManager roomManager;
+        int nextReservationId;
+        
+        void calculateNextId();
+    public:
+        ReservationManager(const std::string& file, RoomManager& rm);
+    
+        bool loadReservationsFromCSV();
+        bool saveReservationsToCSV() const;
+    
+        int createReservation(const std::string& userId, int roomId, 
+                            const std::string& checkInDate, const std::string& checkOutDate);
+        bool cancelReservation(int reservationId);
+    
+        void showUserReservations(const std::string& userId) const;
+        void showAllReservations() const; 
+    
+        std::vector<Reservation> getUserReservations(const std::string& userId) const;
+        Reservation* getReservationById(int reservationId);
 };
 
 #endif

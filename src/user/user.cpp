@@ -2,9 +2,14 @@
 #include <iostream>
 #include <iomanip>
 
-User::User(const std::string &name, const std::string &phone)
-    : name(name), phoneNumber(phone), roomManager("data/rooms.csv")
+User::User(const std::string &userId, const std::string &name, const std::string &phone)
+    : userId(userId), name(name), phoneNumber(phone), roomManager("data/rooms.csv")
 {
+}
+
+std::string User::getUserId() const
+{
+    return userId;
 }
 
 std::string User::getName() const
