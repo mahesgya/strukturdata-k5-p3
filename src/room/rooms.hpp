@@ -22,12 +22,15 @@ public:
     bool loadRoomsFromCSV();
     bool saveRoomsToCSV() const;
 
+    //FEATURE FOR CUSTOMER
     void showAllRooms() const;
     void showAvailableRooms() const;
 
     bool isRoomAvailable(int roomId) const;
     bool updateRoomStatus(int roomId, const std::string& status);
+    Room* getRoomById(int roomId);
 
+    //FEATURE FOR ADMIN
     bool addRoom(const std::string& type, double price);
     bool editRoom(int roomId, const std::string& type, double price);
     bool deleteRoom(int roomId);

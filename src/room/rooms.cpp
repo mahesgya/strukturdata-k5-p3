@@ -58,6 +58,8 @@ bool RoomManager::saveRoomsToCSV() const {
     return true;
 }
 
+//FEATURE FOR CUSTOMER (showAllRooms and showAvailableRooms)
+
 void RoomManager::showAllRooms() const {
     if (rooms.empty()) {
         std::cout << "Tidak ada data kamar." << std::endl;
@@ -122,6 +124,17 @@ bool RoomManager::updateRoomStatus(int roomId, const std::string& status) {
     }
     return false;
 }
+
+Room* RoomManager::getRoomById(int roomId) {
+    for (auto& room : rooms) {
+        if (room.id == roomId) {
+            return &room;
+        }
+    }
+    return nullptr;
+}
+
+//FEATURE FOR ADMIN (addRoom, editRoom, and deleteRoom)
 
 bool RoomManager::addRoom(const std::string& type, double price) {
     int newId = getNextRoomId();
