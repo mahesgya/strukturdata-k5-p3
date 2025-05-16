@@ -22,7 +22,7 @@ class ReservationManager{
         RoomManager roomManager;
         int nextReservationId;
         
-        void calculateNextId();
+        void getReservationNextId();
     public:
         ReservationManager(const std::string& file, RoomManager& rm);
     
