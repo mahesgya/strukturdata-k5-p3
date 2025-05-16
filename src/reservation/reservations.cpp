@@ -18,7 +18,6 @@ void ReservationManager::getReservationNextId() {
     }
 }
 
-
 bool ReservationManager::loadReservationsFromCSV() {
     std::ifstream file(filename);
     
