@@ -79,3 +79,4 @@ bool ReservationManager::saveReservationsToCSV() const {
     file.close();
     return true;
 }
+

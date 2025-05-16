@@ -60,7 +60,7 @@ bool RoomManager::saveRoomsToCSV() const {
 
 void RoomManager::showAllRooms() const {
     if (rooms.empty()) {
-        std::cout << "Tidak ada kamar yang tersedia." << std::endl;
+        std::cout << "Tidak ada data kamar." << std::endl;
         return;
     }
     
@@ -75,6 +75,34 @@ void RoomManager::showAllRooms() const {
     }
     std::cout << "--------------------------------" << std::endl;
 }
+
+void RoomManager::showAvailableRooms() const{
+    if (rooms.empty()) {
+        std::cout << "Tidak ada data kamar." << std::endl;
+        return;
+    }
+
+    std::cout << "=== KAMAR TERSEDIA ===" << std::endl;
+    std::cout << "--------------------------------" << std::endl;
+    std::cout << "ID | Tipe Kamar | Harga" << std::endl;
+    std::cout << "--------------------------------" << std::endl;
+    
+    bool kamarDitemukan = false;
+    
+    for (const auto& room : rooms) {
+        if (room.status == "Available") {
+            std::cout << room.id << " | " << room.type << " | " << room.price << std::endl;
+            kamarDitemukan = true;
+        }
+    }
+    
+    if (!kamarDitemukan) {
+        std::cout << "Tidak ada kamar yang tersedia saat ini." << std::endl;
+    }
+
+    std::cout << "--------------------------------" << std::endl;
+}
+
 
 bool RoomManager::addRoom(const std::string& type, double price) {
     int newId = getNextRoomId();

@@ -23,6 +23,7 @@ public:
     bool saveRoomsToCSV() const;
 
     void showAllRooms() const;
+    void showAvailableRooms() const;
 
     bool addRoom(const std::string& type, double price);
     bool editRoom(int roomId, const std::string& type, double price);
