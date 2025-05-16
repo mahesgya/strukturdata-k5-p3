@@ -79,3 +79,31 @@ bool ReservationManager::saveReservationsToCSV() const {
     return true;
 }
 
+int ReservationManager::createReservation(const std::string& userId, int roomId, 
+                        const std::string& checkInDate, const std::string& checkOutDate) {
+    if (!roomManager.isRoomAvailable(roomId)) {
+        std::cout << "Kamar tidak tersedia untuk dipesan." << std::endl;
+        return -1;
+    }
+    
+    Room* room = roomManager.getRoomById(roomId);
+    if (!room) {
+        std::cout << "Kamar dengan ID " << roomId << " tidak ditemukan." << std::endl;
+        return -1;
+    }
+    
+    Reservation newReservation;
+    newReservation.id = nextReservationId++;
+    newReservation.roomId = roomId;
+    newReservation.userId = userId;
+    newReservation.tanggalCheckIn = checkInDate;
+    newReservation.tanggalCheckOut = checkOutDate;
+    newReservation.totalHarga = room->price;
+    newReservation.status = "Aktif";
+
+    reservations.push_back(newReservation);
+    roomManager.updateRoomStatus(roomId, "terisi");
+    saveReservationsToCSV();
+    
+    return newReservation.id;
+}
