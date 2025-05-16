@@ -48,12 +48,11 @@ bool Auth::loadUsersFromFile()
         size_t commaPos = line.find(',');
         if (commaPos != std::string::npos)
         {
-            std::string userId = line.substr(commaPos + 1);
             std::string name = line.substr(0, commaPos);
             std::string phone = line.substr(commaPos + 1);
+            std::string userId = line.substr(commaPos + 1);
 
-            // Buat user baru
-            User *user = new User(userId, name, phone);
+            User *user = new User(name, phone, userId);
             users.push_back(user);
         }
     }
@@ -76,7 +75,7 @@ bool Auth::saveUsersToFile()
     {
         if (user->getPhoneNumber() != ADMIN_PHONE)
         { 
-            file << user-> getUserId() << user->getName() << "," << user->getPhoneNumber() << std::endl;
+            file << user->getName() << "," << user->getPhoneNumber() << "," << user->getUserId() << std::endl;
         }
     }
 
@@ -106,6 +105,7 @@ bool Auth::loginOrRegister(const std::string &phone, const std::string &name)
         saveUsersToFile();
 
         std::cout << "Akun baru dibuat: " << name << " (" << phone << ")" << std::endl;
+        std::cout << "User ID: " << newUser->getUserId() << std::endl;
         return true;
     }
 

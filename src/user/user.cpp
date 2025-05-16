@@ -2,9 +2,14 @@
 #include <iostream>
 #include <iomanip>
 
-User::User(const std::string &userId, const std::string &name, const std::string &phone)
-    : userId(userId), name(name), phoneNumber(phone), roomManager("data/rooms.csv")
+User::User(const std::string &name, const std::string &phone, const std::string &userId)
+    : name(name), phoneNumber(phone), roomManager("data/rooms.csv")
 {
+    if (userId.empty()) {
+        this->userId = generateUUID();
+    } else {
+        this->userId = userId;
+    }
 }
 
 std::string User::getUserId() const

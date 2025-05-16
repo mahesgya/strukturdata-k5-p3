@@ -3,6 +3,7 @@
 
 #include <string>
 #include "../room/rooms.hpp"
+#include "../utils/uuid_generator/uuid_generator.hpp"
 
 class User
 {
@@ -12,11 +13,8 @@ private:
     std::string phoneNumber;
     RoomManager roomManager; 
 
-    static int lastId;
 public:
-    User(const std::string &name, const std::string &phone);
-    User(const std::string &userId, const std::string &name, const std::string &phone);
-
+    User(const std::string &name, const std::string &phone, const std::string &userId = "");
     std::string getUserId() const;
     std::string getName() const;
     std::string getPhoneNumber() const;

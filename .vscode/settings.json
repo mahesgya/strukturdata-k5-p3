@@ -47,6 +47,8 @@
     "bitset": "cpp",
     "cstring": "cpp",
     "map": "cpp",
-    "regex": "cpp"
+    "regex": "cpp",
+    "chrono": "cpp",
+    "ratio": "cpp"
   }
 }
