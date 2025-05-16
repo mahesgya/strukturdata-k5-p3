@@ -25,6 +25,8 @@ public:
     void showAllRooms() const;
     void showAvailableRooms() const;
 
+    bool isRoomAvailable(int roomId) const;
+
     bool addRoom(const std::string& type, double price);
     bool editRoom(int roomId, const std::string& type, double price);
     bool deleteRoom(int roomId);

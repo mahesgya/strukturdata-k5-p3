@@ -90,7 +90,7 @@ void RoomManager::showAvailableRooms() const{
     bool kamarDitemukan = false;
     
     for (const auto& room : rooms) {
-        if (room.status == "Available") {
+        if (room.status == "tersedia") {
             std::cout << room.id << " | " << room.type << " | " << room.price << std::endl;
             kamarDitemukan = true;
         }
@@ -101,6 +101,15 @@ void RoomManager::showAvailableRooms() const{
     }
 
     std::cout << "--------------------------------" << std::endl;
+}
+
+bool RoomManager::isRoomAvailable(int roomId) const {
+      for (const auto& room : rooms) {
+        if (room.id == roomId && room.status == "tersedia") {
+            return true;
+        }
+    }
+    return false;
 }
 
 
