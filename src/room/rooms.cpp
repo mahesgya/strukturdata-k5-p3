@@ -112,6 +112,16 @@ bool RoomManager::isRoomAvailable(int roomId) const {
     return false;
 }
 
+bool RoomManager::updateRoomStatus(int roomId, const std::string& status) {
+    for (auto& room : rooms) {
+        if (room.id == roomId) {
+            room.status = status;
+            saveRoomsToCSV(); 
+            return true;
+        }
+    }
+    return false;
+}
 
 bool RoomManager::addRoom(const std::string& type, double price) {
     int newId = getNextRoomId();
