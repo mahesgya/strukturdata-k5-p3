@@ -57,3 +57,25 @@ bool ReservationManager::loadReservationsFromCSV() {
     file.close();
     return true;
 }
+
+bool ReservationManager::saveReservationsToCSV() const {
+    std::ofstream file(filename);
+    
+    if (!file.is_open()) {
+        std::cerr << "Error: Tidak dapat membuka file " << filename << " untuk input data" << std::endl;
+        return false;
+    }
+    
+    for (const auto& reservation : reservations) {
+        file << reservation.id << ","
+             << reservation.roomId << ","
+             << reservation.userId << ","
+             << reservation.tanggalCheckIn << ","
+             << reservation.tanggalCheckOut << ","
+             << reservation.totalHarga << ","
+             << reservation.status << std::endl;
+    }
+    
+    file.close();
+    return true;
+}
