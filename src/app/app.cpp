@@ -160,7 +160,7 @@ void App::displayUserMenu(Auth &auth)
     break;
   case 2:
     IOHelper::cls();
-    auth.getCurrentUser()->showUserReservation();
+    auth.getCurrentUser()->showUserReservations();
     IOHelper::pause();
     break;
   case 3:
@@ -219,7 +219,9 @@ void App::displayAdminMenu(Auth &auth)
     IOHelper::pause();
     break;
   case 5:
-    auth.getCurrentUser()->showAllReservation();
+    IOHelper::cls();
+    auth.getCurrentUser()->showAllReservations();
+    IOHelper::pause();
     break;
   case 6:
     std::cout << "Logout berhasil!" << std::endl;

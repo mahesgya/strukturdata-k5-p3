@@ -127,3 +127,42 @@ bool ReservationManager::cancelReservation(int reservationId) {
     return false;
 }
 
+void ReservationManager::showUserReservations(const std::string& userId) const {
+    if(reservations.empty()){
+        std::cout << "Anda tidak memiliki riwayat pemesanan." << std::endl;
+        return;
+    }
+
+    std::cout << "=== DAFTAR RESERVASI ANDA ===" << std::endl;
+    std::cout << "--------------------------------" << std::endl;
+    std::cout << "ID | ID Kamar | Check In | Check Out | Harga | Status" << std::endl;
+    std::cout << "--------------------------------" << std::endl;
+    
+    for (const auto& reservation : reservations ){
+        if(reservation.userId == userId)
+            std:: cout << reservation.id << " | " << reservation.roomId << " | " << reservation.tanggalCheckIn << " | " << reservation.tanggalCheckOut << " | " << reservation.totalHarga << " | " << reservation.status << std::endl;
+    }
+
+    std::cout << "-----------------------------------------------------" << std::endl;
+
+}
+
+void ReservationManager::showAllReservations() const {
+    if(reservations.empty()){
+        std::cout << "Tidak ada pesanan yang tersedia." << std::endl;
+        return;
+    }
+
+    std::cout << "=== DAFTAR RESERVASI ===" << std::endl;
+    std::cout << "--------------------------------" << std::endl;
+    std::cout << "ID | ID Kamar | Check In | Check Out | Harga | Status" << std::endl;
+    std::cout << "--------------------------------" << std::endl;
+    
+    for (const auto& reservation : reservations ){
+        std:: cout << reservation.id << " | " << reservation.roomId << " | " << reservation.tanggalCheckIn << " | " << reservation.tanggalCheckOut << " | " << reservation.totalHarga << " | " << reservation.status << std::endl;
+    }
+
+    std::cout << "-----------------------------------------------------" << std::endl;
+
+}
+

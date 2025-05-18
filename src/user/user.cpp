@@ -145,3 +145,11 @@ void User::deleteRoom()
         std::cout << "Data kamar gagal dihapus." << std::endl;
     }
 }
+
+void User::showUserReservations(){
+    reservationManager.showUserReservations(getUserId());
+}
+
+void User::showAllReservations(){
+    reservationManager.showAllReservations();
+}
