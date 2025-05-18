@@ -31,9 +31,10 @@ bool ReservationManager::loadReservationsFromCSV() {
     
     while (std::getline(file, line)) {
         std::stringstream ss(line);
-        std::string idStr, roomIdStr, userId, tanggalCheckIn, tanggalCheckOut, totalHargaStr, status;
+        std::string idStr,name, roomIdStr, userId, tanggalCheckIn, tanggalCheckOut, totalHargaStr, status;
         
         std::getline(ss, idStr, ',');
+        std::getline(ss, name, ',');
         std::getline(ss, roomIdStr, ',');
         std::getline(ss, userId, ',');
         std::getline(ss, tanggalCheckIn, ',');
@@ -43,6 +44,7 @@ bool ReservationManager::loadReservationsFromCSV() {
         
         Reservation reservation;
         reservation.id = std::stoi(idStr);
+        reservation.name = name;
         reservation.roomId = std::stoi(roomIdStr);
         reservation.userId = userId;
         reservation.tanggalCheckIn = tanggalCheckIn;
@@ -67,6 +69,7 @@ bool ReservationManager::saveReservationsToCSV() const {
     
     for (const auto& reservation : reservations) {
         file << reservation.id << ","
+             << reservation.name << ","
              << reservation.roomId << ","
              << reservation.userId << ","
              << reservation.tanggalCheckIn << ","
@@ -79,20 +82,21 @@ bool ReservationManager::saveReservationsToCSV() const {
     return true;
 }
 
-int ReservationManager::createReservation(const std::string& userId, int roomId, const std::string& checkInDate, const std::string& checkOutDate) {
-    if (!roomManager.isRoomAvailable(roomId)) {
-        std::cout << "Kamar tidak tersedia untuk dipesan." << std::endl;
-        return -1;
-    }
-    
+int ReservationManager::createReservation(const std::string& userId,const std::string& userName, int roomId, const std::string& checkInDate, const std::string& checkOutDate) {
     Room* room = roomManager.getRoomById(roomId);
     if (!room) {
         std::cout << "Kamar dengan ID " << roomId << " tidak ditemukan." << std::endl;
         return -1;
     }
+
+    if (!roomManager.isRoomAvailable(roomId)) {
+        std::cout << "Kamar tidak tersedia untuk dipesan." << std::endl;
+        return -1;
+    }
     
     Reservation newReservation;
     newReservation.id = nextReservationId++;
+    newReservation.name = userName;
     newReservation.roomId = roomId;
     newReservation.userId = userId;
     newReservation.tanggalCheckIn = checkInDate; 

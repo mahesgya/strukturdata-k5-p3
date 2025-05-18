@@ -43,17 +43,24 @@ bool Auth::loadUsersFromFile()
     while (std::getline(file, line))
     {
         if (line.empty() || line[0] == '#')
-            continue; 
+            continue;
 
-        size_t commaPos = line.find(',');
-        if (commaPos != std::string::npos)
+        size_t firstCommaPos = line.find(',');
+        if (firstCommaPos != std::string::npos)
         {
-            std::string name = line.substr(0, commaPos);
-            std::string phone = line.substr(commaPos + 1);
-            std::string userId = line.substr(commaPos + 1);
+            std::string name = line.substr(0, firstCommaPos);
 
-            User *user = new User(name, phone, userId);
-            users.push_back(user);
+
+
+            size_t secondCommaPos = line.find(',', firstCommaPos + 1);
+            if (secondCommaPos != std::string::npos)
+            {
+                std::string phone = line.substr(firstCommaPos + 1, secondCommaPos - firstCommaPos - 1);
+                std::string userId = line.substr(secondCommaPos + 1);
+
+                User *user = new User(name, phone, userId);
+                users.push_back(user);
+            }
         }
     }
 

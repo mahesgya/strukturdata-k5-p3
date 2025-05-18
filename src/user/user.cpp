@@ -2,6 +2,8 @@
 #include <iostream>
 #include <iomanip>
 
+#include "../utils/validator/validator.hpp"
+
 User::User(const std::string &name, const std::string &phone, const std::string &userId)
     : name(name), phoneNumber(phone), roomManager("data/rooms.csv"), reservationManager("data/reservations.csv")
 {
@@ -34,9 +36,31 @@ void User::viewRoom() const
 
 void User::makeReservation() 
 {   
+    std::string tanggalCheckIn, tanggalCheckOut;
+    int idKamar;
+
+    std::cout << "Silahkan masukkan id kamar yang ingin di pesan: " << std::endl;
+    std::cin >> idKamar;
+
+    do
+    {
+        std::cout << "Silahkan masukkan tanggal Check In (dd-mm-yyyy): " << std::endl;
+        std::cin >> tanggalCheckIn;
+
+        if(!validasiTanggal(tanggalCheckIn))
+            std::cout << "Tanggal tidak valid gunakan format dd-mm-yyyy.";
+    } while (!validasiTanggal(tanggalCheckIn));
+
+    do
+    {
+        std::cout << "Silahkan masukkan tanggal Check Out (dd-mm-yyyy): " << std::endl;
+        std::cin >> tanggalCheckOut;
+
+        if(!validasiTanggal(tanggalCheckOut))
+            std::cout << "Tanggal tidak valid gunakan format dd-mm-yyyy.";
+    } while (!validasiTanggal(tanggalCheckOut));
     
-    reservationManager.createReservation(getUserId(), 201, "20-05-2025", "21-05-2025");
-    
+    reservationManager.createReservation(getUserId(), getName(), idKamar, tanggalCheckIn, tanggalCheckOut);
 }
 
 void User::cancelReservation() 

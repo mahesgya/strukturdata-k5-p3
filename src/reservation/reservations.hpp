@@ -8,6 +8,7 @@
 struct Reservation {
     int id;
     int roomId;
+    std::string name;
     std::string userId;
     std::string tanggalCheckIn;
     std::string tanggalCheckOut;
@@ -29,7 +30,7 @@ class ReservationManager{
         bool loadReservationsFromCSV();
         bool saveReservationsToCSV() const;
     
-        int createReservation(const std::string& userId, int roomId, 
+        int createReservation(const std::string& userId, const std::string& userName, int roomId, 
                             const std::string& checkInDate, const std::string& checkOutDate);
         bool cancelReservation(int reservationId);
     
