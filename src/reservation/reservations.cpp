@@ -31,10 +31,10 @@ bool ReservationManager::loadReservationsFromCSV() {
     
     while (std::getline(file, line)) {
         std::stringstream ss(line);
-        std::string idStr,name, roomIdStr, userId, tanggalCheckIn, tanggalCheckOut, totalHargaStr, status;
+        std::string idStr, userName, roomIdStr, userId, tanggalCheckIn, tanggalCheckOut, totalHargaStr, status;
         
         std::getline(ss, idStr, ',');
-        std::getline(ss, name, ',');
+        std::getline(ss, userName, ',');
         std::getline(ss, roomIdStr, ',');
         std::getline(ss, userId, ',');
         std::getline(ss, tanggalCheckIn, ',');
@@ -44,12 +44,12 @@ bool ReservationManager::loadReservationsFromCSV() {
         
         Reservation reservation;
         reservation.id = std::stoi(idStr);
-        reservation.name = name;
+        reservation.name = userName;
         reservation.roomId = std::stoi(roomIdStr);
         reservation.userId = userId;
         reservation.tanggalCheckIn = tanggalCheckIn;
         reservation.tanggalCheckOut= tanggalCheckOut;
-        reservation.totalHarga = std::stod(totalHargaStr);
+        reservation.totalHarga = std::stoi(totalHargaStr);
         reservation.status = status;
         
         reservations.push_back(reservation);
