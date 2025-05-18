@@ -9,6 +9,7 @@ class App {
     private:
         void handleCustomerLogin(Auth &auth);
         void handleAdminLogin();
+        
         void displayMainMenu(Auth &auth);
         void displayUserMenu(Auth &auth);
         void displayAdminMenu(Auth &auth);

@@ -23,12 +23,14 @@ public:
 
 
     void viewRoom() const;
+    void showUserReservation();
     void makeReservation() ;
     void cancelReservation();
     
     void addRoom();
     void editRoom();
     void deleteRoom();
+    void showAllReservation();
 
     static void setLastId(int id);
     static int getLastId(); 

@@ -143,8 +143,8 @@ void App::displayUserMenu(Auth &auth)
   IOHelper::cls();
   std::cout << "=== MENU USER ===" << std::endl;
   std::cout << "1. Lihat Daftar Kamar" << std::endl;
-  std::cout << "2. Buat Booking" << std::endl;
-  std::cout << "3. Cancel Booking" << std::endl;
+  std::cout << "2. Lihat Reservasi" << std::endl;
+  std::cout << "3. Buat Reservasi" << std::endl;
   std::cout << "4. Logout" << std::endl;
   std::cout << "Pilihan: ";
 
@@ -160,12 +160,12 @@ void App::displayUserMenu(Auth &auth)
     break;
   case 2:
     IOHelper::cls();
-    auth.getCurrentUser()->makeReservation();
+    auth.getCurrentUser()->showUserReservation();
     IOHelper::pause();
     break;
   case 3:
     IOHelper::cls();
-    auth.getCurrentUser()->cancelReservation();
+    auth.getCurrentUser()->makeReservation();
     IOHelper::pause();
     break;
   case 4:
@@ -189,7 +189,8 @@ void App::displayAdminMenu(Auth &auth)
   std::cout << "2. Tambah Daftar Kamar" << std::endl;
   std::cout << "3. Edit Daftar Kamar" << std::endl;
   std::cout << "4. Delete Kamar" << std::endl;
-  std::cout << "5. Logout" << std::endl;
+  std::cout << "5. Lihat Semua Reservasi" << std::endl;
+  std::cout << "6. Logout" << std::endl;
   std::cout << "Pilihan: ";
 
   int choice;
@@ -218,6 +219,9 @@ void App::displayAdminMenu(Auth &auth)
     IOHelper::pause();
     break;
   case 5:
+    auth.getCurrentUser()->showAllReservation();
+    break;
+  case 6:
     std::cout << "Logout berhasil!" << std::endl;
     displayMainMenu(auth);
     break;
