@@ -1,5 +1,5 @@
-#ifndef PHONE_VALIDATOR_HPP
-#define PHONE_VALIDATOR_HPP
+#ifndef VALIDATOR_HPP
+#define VALIDATOR_HPP
 
 #include <string>
 

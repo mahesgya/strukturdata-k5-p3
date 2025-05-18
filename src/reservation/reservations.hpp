@@ -24,7 +24,7 @@ class ReservationManager{
         
         void getReservationNextId();
     public:
-        ReservationManager(const std::string& file, RoomManager& rm);
+        ReservationManager(const std::string& file);
     
         bool loadReservationsFromCSV();
         bool saveReservationsToCSV() const;

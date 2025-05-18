@@ -5,7 +5,7 @@
 #include "./app.hpp"
 #include "../user/user.hpp"
 #include "../auth/auth.hpp"
-#include "../utils/phone_validator/phone_validator.hpp"
+#include "../utils/validator/validator.hpp"
 #include "../utils/io_helper/io_helper.hpp"
 
 using namespace std;
@@ -160,12 +160,12 @@ void App::displayUserMenu(Auth &auth)
     break;
   case 2:
     IOHelper::cls();
-    auth.getCurrentUser()->makeBooking();
+    auth.getCurrentUser()->makeReservation();
     IOHelper::pause();
     break;
   case 3:
     IOHelper::cls();
-    auth.getCurrentUser()->cancelBooking();
+    auth.getCurrentUser()->cancelReservation();
     IOHelper::pause();
     break;
   case 4:

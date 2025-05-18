@@ -3,8 +3,8 @@
 #include <fstream>
 #include <sstream>
 
-ReservationManager::ReservationManager(const std::string& file, RoomManager& rm) 
-    : filename(file), roomManager(rm), nextReservationId(1) {
+ReservationManager::ReservationManager(const std::string& file) 
+    : filename(file), roomManager("data/rooms.csv") {
     loadReservationsFromCSV();
     getReservationNextId();
 }
@@ -122,3 +122,4 @@ bool ReservationManager::cancelReservation(int reservationId) {
     std::cout << "Reservasi dengan ID " << reservationId << " tidak ditemukan atau sudah dibatalkan." << std::endl;
     return false;
 }
+

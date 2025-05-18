@@ -3,7 +3,7 @@
 #include <iomanip>
 
 User::User(const std::string &name, const std::string &phone, const std::string &userId)
-    : name(name), phoneNumber(phone), roomManager("data/rooms.csv")
+    : name(name), phoneNumber(phone), roomManager("data/rooms.csv"), reservationManager("data/reservations.csv")
 {
     if (userId.empty()) {
         this->userId = generateUUID();
@@ -32,13 +32,14 @@ void User::viewRoom() const
     roomManager.showAllRooms();
 }
 
-void User::makeBooking() const
-{
-    std::cout << "=== Buat Booking ===" << std::endl;
-    std::cout << "====================" << std::endl;
+void User::makeReservation() 
+{   
+    
+    reservationManager.createReservation(getUserId(), 201, "20-05-2025", "21-05-2025");
+    
 }
 
-void User::cancelBooking() const
+void User::cancelReservation() 
 {
     std::cout << "=== Cancel Booking ===" << std::endl;
     std::cout << "====================" << std::endl;

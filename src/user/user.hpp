@@ -4,6 +4,7 @@
 #include <string>
 #include "../room/rooms.hpp"
 #include "../utils/uuid_generator/uuid_generator.hpp"
+#include "../reservation/reservations.hpp"
 
 class User
 {
@@ -12,6 +13,7 @@ private:
     std::string name;
     std::string phoneNumber;
     RoomManager roomManager; 
+    ReservationManager reservationManager;
 
 public:
     User(const std::string &name, const std::string &phone, const std::string &userId = "");
@@ -21,8 +23,8 @@ public:
 
 
     void viewRoom() const;
-    void makeBooking() const;
-    void cancelBooking() const;
+    void makeReservation() ;
+    void cancelReservation();
     
     void addRoom();
     void editRoom();
