@@ -7,9 +7,12 @@
 User::User(const std::string &name, const std::string &phone, const std::string &userId)
     : name(name), phoneNumber(phone), roomManager("data/rooms.csv"), reservationManager("data/reservations.csv")
 {
-    if (userId.empty()) {
+    if (userId.empty())
+    {
         this->userId = generateUUID();
-    } else {
+    }
+    else
+    {
         this->userId = userId;
     }
 }
@@ -34,20 +37,28 @@ void User::viewRoom() const
     roomManager.showAllRooms();
 }
 
-void User::makeReservation() 
-{   
+void User::makeReservation()
+{
     std::string tanggalCheckIn, tanggalCheckOut;
     int idKamar;
+    bool valid = false;
 
-    std::cout << "Silahkan masukkan id kamar yang ingin di pesan: " << std::endl;
-    std::cin >> idKamar;
+    do
+    {
+        std::cout << "Silahkan masukkan id kamar yang ingin di pesan: " << std::endl;
+        std::cin >> idKamar;
+
+        if (!roomManager.isRoomExists(idKamar))
+            std::cout << "Kamar tidak ditemukan coba pilih id kamar yang lain.";
+
+    } while (!roomManager.isRoomExists(idKamar));
 
     do
     {
         std::cout << "Silahkan masukkan tanggal Check In (dd-mm-yyyy): " << std::endl;
         std::cin >> tanggalCheckIn;
 
-        if(!validasiTanggal(tanggalCheckIn))
+        if (!validasiTanggal(tanggalCheckIn))
             std::cout << "Tanggal tidak valid gunakan format dd-mm-yyyy.";
     } while (!validasiTanggal(tanggalCheckIn));
 
@@ -56,23 +67,24 @@ void User::makeReservation()
         std::cout << "Silahkan masukkan tanggal Check Out (dd-mm-yyyy): " << std::endl;
         std::cin >> tanggalCheckOut;
 
-        if(!validasiTanggal(tanggalCheckOut))
+        if (!validasiTanggal(tanggalCheckOut))
             std::cout << "Tanggal tidak valid gunakan format dd-mm-yyyy.";
     } while (!validasiTanggal(tanggalCheckOut));
-    
+
     reservationManager.createReservation(getUserId(), getName(), idKamar, tanggalCheckIn, tanggalCheckOut);
 }
 
-void User::cancelReservation() 
+void User::cancelReservation()
 {
     std::cout << "=== Cancel Booking ===" << std::endl;
     std::cout << "====================" << std::endl;
 }
 
-void User::addRoom() 
+void User::addRoom()
 {
     std::cout << "=== TAMBAH KAMAR BARU ===" << std::endl;
-    std::cout << "=======================" << std::endl << std::endl;
+    std::cout << "=======================" << std::endl
+              << std::endl;
 
     std::string roomType;
     double roomPrice;
@@ -84,25 +96,28 @@ void User::addRoom()
     std::cin >> roomPrice;
     std::cout << std::endl;
 
-    if(roomManager.addRoom(roomType, roomPrice)){
+    if (roomManager.addRoom(roomType, roomPrice))
+    {
         std::cout << "Data Kamar Baru Berhasil dibuat Dengan Rincian Sebagai Berikut: " << std::endl;
         std::cout << "Tipe Kamar: " << roomType << std::endl;
         std::cout << "Harga Kamar: " << std::fixed << std::setprecision(0) << roomPrice << std::endl;
-    }else{
+    }
+    else
+    {
         std::cout << "Data Kamar Baru Gagal dibuat." << std::endl;
     }
 }
 
-void User::editRoom() 
+void User::editRoom()
 {
     std::cout << "=== EDIT KAMAR ===" << std::endl;
-    std::cout << "=======================" << std::endl << std::endl;
-    
+    std::cout << "=======================" << std::endl
+              << std::endl;
 
     int roomId;
     std::string roomType;
     double roomPrice;
-    
+
     std::cout << "Silakan masukkan ID kamar yang ingin diedit: " << std::endl;
     std::cout << "ID Kamar: ";
     std::cin >> roomId;
@@ -115,41 +130,49 @@ void User::editRoom()
     std::cin >> roomPrice;
     std::cout << std::endl;
 
-    if (roomManager.editRoom(roomId, roomType, roomPrice)) {
+    if (roomManager.editRoom(roomId, roomType, roomPrice))
+    {
         std::cout << "Data kamar berhasil diubah dengan rincian sebagai berikut: " << std::endl;
         std::cout << "ID Kamar: " << roomId << std::endl;
         std::cout << "Tipe Kamar: " << roomType << std::endl;
         std::cout << "Harga Kamar: " << std::fixed << std::setprecision(0) << roomPrice << std::endl;
-    } else {
+    }
+    else
+    {
         std::cout << "Data kamar gagal diubah." << std::endl;
     }
 }
 
-
-void User::deleteRoom() 
+void User::deleteRoom()
 {
     std::cout << "=== DELETE KAMAR ===" << std::endl;
-    std::cout << "=======================" << std::endl << std::endl;
+    std::cout << "=======================" << std::endl
+              << std::endl;
 
     int roomId;
-    
+
     std::cout << "Silakan masukkan ID kamar yang ingin dihapus: " << std::endl;
     std::cout << "ID Kamar: ";
     std::cin >> roomId;
     std::cout << std::endl;
 
-    if (roomManager.deleteRoom(roomId)) {
+    if (roomManager.deleteRoom(roomId))
+    {
         std::cout << "Data kamar berhasil dihapus: " << std::endl;
         std::cout << "ID Kamar: " << roomId << std::endl;
-    } else {
+    }
+    else
+    {
         std::cout << "Data kamar gagal dihapus." << std::endl;
     }
 }
 
-void User::showUserReservations(){
+void User::showUserReservations()
+{
     reservationManager.showUserReservations(getUserId());
 }
 
-void User::showAllReservations(){
+void User::showAllReservations()
+{
     reservationManager.showAllReservations();
 }

@@ -27,6 +27,7 @@ public:
     void showAvailableRooms() const;
 
     bool isRoomAvailable(int roomId) const;
+    bool isRoomExists(int roomId) const;
     bool updateRoomStatus(int roomId, const std::string& status);
     Room* getRoomById(int roomId);
 

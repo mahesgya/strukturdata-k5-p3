@@ -143,7 +143,7 @@ void App::displayUserMenu(Auth &auth)
   IOHelper::cls();
   std::cout << "=== MENU USER ===" << std::endl;
   std::cout << "1. Lihat Daftar Kamar" << std::endl;
-  std::cout << "2. Lihat Reservasi" << std::endl;
+  std::cout << "2. Lihat Riwayat Reservasi " << std::endl;
   std::cout << "3. Buat Reservasi" << std::endl;
   std::cout << "4. Logout" << std::endl;
   std::cout << "Pilihan: ";

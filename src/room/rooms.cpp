@@ -114,6 +114,15 @@ bool RoomManager::isRoomAvailable(int roomId) const {
     return false;
 }
 
+bool RoomManager::isRoomExists(int roomId) const {
+      for (const auto& room : rooms) {
+        if (room.id == roomId) {
+            return true;
+        }
+    }
+    return false;
+}
+
 bool RoomManager::updateRoomStatus(int roomId, const std::string& status) {
     for (auto& room : rooms) {
         if (room.id == roomId) {
