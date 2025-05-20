@@ -39,6 +39,7 @@ class ReservationManager{
     
         std::vector<Reservation> getUserReservations(const std::string& userId) const;
         Reservation* getReservationById(int reservationId);
+        void processQueue();
 };
 
 #endif

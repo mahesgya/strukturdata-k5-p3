@@ -50,5 +50,8 @@
     "regex": "cpp",
     "chrono": "cpp",
     "ratio": "cpp"
+  },
+  "files.watcherExclude": {
+    "**/target": true
   }
 }
