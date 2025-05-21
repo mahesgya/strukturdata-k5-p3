@@ -146,7 +146,7 @@ int ReservationManager::createReservation(const std::string &userId, const std::
     return newReservation.id;
 }
 
-void ReservationManager::showUserReservations(const std::string &userName) const
+void ReservationManager::showUserReservations(const std::string &userId) const
 {
     bool adaReservasi = false;
     std::cout << "=== DAFTAR RESERVASI ANDA ===" << std::endl;
@@ -156,7 +156,7 @@ void ReservationManager::showUserReservations(const std::string &userName) const
 
     for (const auto &reservation : reservations)
     {
-        if (userName == reservation.name)
+        if (reservation.userId == userId)
         {
             std::cout << reservation.id << " | " << reservation.roomId << " | " << reservation.tanggalCheckIn << " | " << reservation.tanggalCheckOut << " | " << reservation.totalHarga << " | " << reservation.status << std::endl;
             adaReservasi = true;
