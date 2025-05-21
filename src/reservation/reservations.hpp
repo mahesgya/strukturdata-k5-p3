@@ -32,8 +32,8 @@ class ReservationManager{
     
         int createReservation(const std::string& userId, const std::string& userName, int roomId, 
                             const std::string& checkInDate, const std::string& checkOutDate);
+        void cancelReservation(const std::string &userId);
         bool cancelReservation(int reservationId);
-    
         void showUserReservations(const std::string& userId) const;
         void showAllReservations() const; 
     

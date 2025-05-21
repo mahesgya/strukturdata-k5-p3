@@ -39,6 +39,8 @@ void User::viewRoom() const
 
 void User::makeReservation()
 {
+    roomManager.showAllRooms();
+
     std::string tanggalCheckIn, tanggalCheckOut;
     int idKamar;
     bool valid = false;
@@ -78,6 +80,7 @@ void User::cancelReservation()
 {
     std::cout << "=== Cancel Booking ===" << std::endl;
     std::cout << "====================" << std::endl;
+    reservationManager.cancelReservation(getUserId());
 }
 
 void User::addRoom()
