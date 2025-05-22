@@ -199,9 +199,7 @@ void User::editRoom()
 
 void User::deleteRoom()
 {
-    std::cout << "=== DELETE KAMAR ===" << std::endl;
-    std::cout << "=======================" << std::endl
-              << std::endl;
+    viewRoom();
 
     int roomId;
 
