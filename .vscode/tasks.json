@@ -14,7 +14,6 @@
         "src/app/app.cpp",
         "src/user/user.cpp",
         "src/auth/auth.cpp",
-        "src/queue/queue.cpp",
         "src/room/rooms.cpp",
         "src/reservation/reservations.cpp",
         "src/utils/validator/validator.cpp",

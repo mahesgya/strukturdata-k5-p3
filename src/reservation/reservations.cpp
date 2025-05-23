@@ -1,11 +1,9 @@
 #include "reservations.hpp"
-#include "../queue/queue.hpp"
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
 
-// Tambahkan instance queue
-ReservationQueue reservationQueue;
 
 ReservationManager::ReservationManager(const std::string &file)
     : filename(file), roomManager("data/rooms.csv")
@@ -95,21 +93,6 @@ bool ReservationManager::saveReservationsToCSV() const
     file.close();
     return true;
 }
-void ReservationManager::processQueue()
-{
-    while (!reservationQueue.isEmpty())
-    {
-        ReservationRequest request = reservationQueue.getNextRequest();
-        if (roomManager.isRoomAvailable(request.roomId))
-        {
-            createReservation(request.userId, request.userName, request.roomId, request.checkInDate, request.checkOutDate);
-        }
-        else
-        {
-            break;
-        }
-    }
-}
 
 int ReservationManager::createReservation(const std::string &userId, const std::string &userName, int roomId, const std::string &checkInDate, const std::string &checkOutDate)
 {
@@ -123,10 +106,7 @@ int ReservationManager::createReservation(const std::string &userId, const std::
 
     if (!roomManager.isRoomAvailable(roomId))
     {
-        std::cout << "Kamar tidak tersedia untuk dipesan. Memasukkan ke dalam antrian." << std::endl;
-        ReservationRequest request = {userId, userName, roomId, checkInDate, checkOutDate};
-        reservationQueue.addToQueue(request);
-        return -1;
+         std::cout << "Kamar tidak tersedia untuk dipesan." << std::endl;
     }
 
     Reservation newReservation;

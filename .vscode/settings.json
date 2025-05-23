@@ -79,8 +79,5 @@
     "xtree": "cpp",
     "xutility": "cpp",
     "stack": "cpp"
-  },
-  "files.watcherExclude": {
-    "**/target": true
   }
 }
