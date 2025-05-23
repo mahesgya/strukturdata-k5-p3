@@ -39,6 +39,8 @@ void User::viewRoom() const
 
 void User::makeReservation()
 {
+    roomManager.showAllRooms();
+
     std::string tanggalCheckIn, tanggalCheckOut;
     int idKamar;
     bool valid = false;
@@ -78,20 +80,45 @@ void User::cancelReservation()
 {
     std::cout << "=== Cancel Booking ===" << std::endl;
     std::cout << "====================" << std::endl;
+    reservationManager.cancelReservation(getUserId());
 }
 
 void User::addRoom()
 {
-    std::cout << "=== TAMBAH KAMAR BARU ===" << std::endl;
-    std::cout << "=======================" << std::endl
-              << std::endl;
-
     std::string roomType;
     double roomPrice;
 
     std::cout << "Silahkan Input Data Kamar yang Diperlukan" << std::endl;
-    std::cout << "Tipe Kamar: ";
-    std::cin >> roomType;
+    std::cout << "===========================================" << std::endl;
+
+    std::cout << "1. Presidential" << std::endl;
+    std::cout << "2. Suite" << std::endl;
+    std::cout << "3. Deluxe" << std::endl;
+    std::cout << "4. Superior" << std::endl;
+    std::cout << "5. Standard" << std::endl;
+    std::cout << "Tipe Kamar : ";
+
+    int choice;
+    std::cin >> choice;
+    switch (choice) {
+    case 1:
+        roomType = "Presidential";
+        break;
+    case 2:
+        roomType = "Suite";
+        break;
+    case 3:
+        roomType = "Deluxe";
+        break;
+    case 4:
+        roomType = "Superior";
+        break;
+    case 5:
+        roomType = "Standard";
+        break;
+    default:
+        std::cout << "Pilihan tidak valid. Silahkan coba lagi." << std::endl;
+    }
     std::cout << "Harga per Malam: ";
     std::cin >> roomPrice;
     std::cout << std::endl;
@@ -110,9 +137,7 @@ void User::addRoom()
 
 void User::editRoom()
 {
-    std::cout << "=== EDIT KAMAR ===" << std::endl;
-    std::cout << "=======================" << std::endl
-              << std::endl;
+    viewRoom();
 
     int roomId;
     std::string roomType;
@@ -124,8 +149,37 @@ void User::editRoom()
     std::cout << std::endl;
 
     std::cout << "Silakan masukkan data baru yang diperlukan: " << std::endl;
+    std::cout << "===========================================" << std::endl;
+    
+    std::cout << "1. Presidential" << std::endl;
+    std::cout << "2. Suite" << std::endl;
+    std::cout << "3. Deluxe" << std::endl;
+    std::cout << "4. Superior" << std::endl;
+    std::cout << "5. Standard" << std::endl;
     std::cout << "Tipe Kamar baru: ";
-    std::cin >> roomType;
+
+    int choice;
+    std::cin >> choice;
+    switch (choice) {
+    case 1:
+        roomType = "Presidential";
+        break;
+    case 2:
+        roomType = "Suite";
+        break;
+    case 3:
+        roomType = "Deluxe";
+        break;
+    case 4:
+        roomType = "Superior";
+        break;
+    case 5:
+        roomType = "Standard";
+        break;
+    default:
+        std::cout << "Pilihan tidak valid. Silahkan coba lagi." << std::endl;
+    }
+
     std::cout << "Harga per malam baru: ";
     std::cin >> roomPrice;
     std::cout << std::endl;
@@ -145,9 +199,7 @@ void User::editRoom()
 
 void User::deleteRoom()
 {
-    std::cout << "=== DELETE KAMAR ===" << std::endl;
-    std::cout << "=======================" << std::endl
-              << std::endl;
+    viewRoom();
 
     int roomId;
 

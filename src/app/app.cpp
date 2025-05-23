@@ -145,7 +145,8 @@ void App::displayUserMenu(Auth &auth)
   std::cout << "1. Lihat Daftar Kamar" << std::endl;
   std::cout << "2. Lihat Riwayat Reservasi " << std::endl;
   std::cout << "3. Buat Reservasi" << std::endl;
-  std::cout << "4. Logout" << std::endl;
+  std::cout << "4. Batalkan Reservasi" << std::endl;
+  std::cout << "5. Logout" << std::endl;
   std::cout << "Pilihan: ";
 
   int choice;
@@ -169,6 +170,11 @@ void App::displayUserMenu(Auth &auth)
     IOHelper::pause();
     break;
   case 4:
+    IOHelper::cls();
+    auth.getCurrentUser()->cancelReservation();
+    IOHelper::pause();
+    break;
+  case 5:
     std::cout << "Logout berhasil!" << std::endl;
     displayMainMenu(auth);
     break;
