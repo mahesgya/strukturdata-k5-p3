@@ -201,8 +201,8 @@ void App::displayAdminMenu(Auth &auth)
   std::cout << "4. Delete Kamar" << std::endl;
   std::cout << "5. Lihat Semua Reservasi" << std::endl;
   std::cout << "6. Lihat Antrean Reservasi" << std::endl;
-  std::cout << "7. Logout" << std::endl;
-  std::cout << "8. Proses 1 Antrean Reservasi Secara Manual" << std::endl;
+  std::cout << "7. Proses 1 Antrean Reservasi Secara Manual" << std::endl;
+  std::cout << "8. Logout" << std::endl;
   std::cout << "Pilihan: ";
 
   int choice;
@@ -240,11 +240,7 @@ void App::displayAdminMenu(Auth &auth)
     reservationQueue.showQueue();
     IOHelper::pause();
     break;
-  case 7:
-    std::cout << "Logout berhasil!" << std::endl;
-    displayMainMenu(auth);
-    break;
-case 8:
+    case 7:
     IOHelper::cls();
     int roomId;
     std::cout << "Masukkan nomor kamar yang ingin diproses: ";
@@ -252,6 +248,10 @@ case 8:
     reservationManager.processQueueForRoom(roomId);
     IOHelper::pause();
     break;
+    case 8:
+      std::cout << "Logout berhasil!" << std::endl;
+      displayMainMenu(auth);
+      break;
   default:
     std::cout << "Pilihan tidak valid!" << std::endl;
     IOHelper::pause();
