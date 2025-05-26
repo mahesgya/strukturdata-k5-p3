@@ -3,14 +3,18 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <limits>
 
 // Tambahkan instance queue
 ReservationQueue reservationQueue;
+// Di salah satu file .cpp
+ReservationManager reservationManager("data/reservations.csv");
 
 ReservationManager::ReservationManager(const std::string& file) 
     : filename(file), roomManager("data/rooms.csv") {
     loadReservationsFromCSV();
     getReservationNextId();
+    reservationQueue.loadFromFile(); 
 }
 
 void ReservationManager::getReservationNextId() {
@@ -63,6 +67,8 @@ bool ReservationManager::loadReservationsFromCSV() {
     return true;
 }
 
+
+
 bool ReservationManager::saveReservationsToCSV() const {
     std::ofstream file(filename);
     
@@ -85,9 +91,47 @@ bool ReservationManager::saveReservationsToCSV() const {
     file.close();
     return true;
 }
+
+void ReservationManager::processQueueForRoom(int roomId) {
+    if (reservationQueue.isEmpty()) {
+        std::cout << "Antrean kosong.\n";
+        return;
+    }
+
+    // Buat antrean baru untuk menampung request yang tidak diproses
+    std::queue<ReservationRequest> tempQueue;
+    bool found = false;
+
+    while (!reservationQueue.isEmpty()) {
+        ReservationRequest request = reservationQueue.getNextRequest();
+        // Jika request untuk kamar yang dipilih dan kamar tersedia
+        if (request.roomId == roomId && roomManager.isRoomAvailable(roomId) && !found) {
+            int resId = createReservation(request.userId, request.userName, request.roomId, request.checkInDate, request.checkOutDate);
+            if (resId != -1) {
+                std::cout << "Reservasi berhasil diproses untuk " << request.userName << " pada kamar " << request.roomId << ".\n";
+                found = true; // hanya proses satu request untuk kamar ini
+            } else {
+                std::cout << "Gagal memproses reservasi untuk " << request.userName << ".\n";
+                tempQueue.push(request);
+            }
+        } else {
+            tempQueue.push(request);
+        }
+    }
+
+    // Kembalikan antrean yang belum diproses ke queue utama
+    reservationQueue = ReservationQueue(tempQueue);
+    reservationQueue.saveToFile();
+
+    if (!found) {
+        std::cout << "Tidak ada antrean untuk kamar " << roomId << " atau kamar masih penuh.\n";
+    }
+}
+
 void ReservationManager::processQueue() {
     while (!reservationQueue.isEmpty()) {
         ReservationRequest request = reservationQueue.getNextRequest();
+        reservationQueue.saveToFile();
         if (roomManager.isRoomAvailable(request.roomId)) {
             createReservation(request.userId, request.userName, request.roomId, request.checkInDate, request.checkOutDate);
         } else {
@@ -95,18 +139,29 @@ void ReservationManager::processQueue() {
         }
     }
 }
-
 int ReservationManager::createReservation(const std::string& userId,const std::string& userName, int roomId, const std::string& checkInDate, const std::string& checkOutDate) {
     Room* room = roomManager.getRoomById(roomId);
     if (!room) {
         std::cout << "Kamar dengan ID " << roomId << " tidak ditemukan." << std::endl;
         return -1;
     }
-    
+
     if (!roomManager.isRoomAvailable(roomId)) {
-        std::cout << "Kamar tidak tersedia untuk dipesan. Memasukkan ke dalam antrian." << std::endl;
-        ReservationRequest request = {userId, userName, roomId, checkInDate, checkOutDate};
-        reservationQueue.addToQueue(request);
+        std::cout << "Kamar tidak tersedia untuk dipesan. Apakah anda ingin masuk ke dalam antrean?\n";
+        std::cout << "1. Ya\n2. Tidak\n";
+        std::cout << "Pilihan: ";
+        int pilihan;
+        std::cin >> pilihan;
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Bersihkan buffer
+
+        if (pilihan == 1) {
+            ReservationRequest request = {userId, userName, roomId, checkInDate, checkOutDate};
+            reservationQueue.addToQueue(request);
+            reservationQueue.saveToFile();
+            std::cout << "Anda telah masuk ke dalam antrean.\n";
+        } else {
+            std::cout << "Anda tidak masuk ke dalam antrean.\n";
+        }
         return -1;
     }
     

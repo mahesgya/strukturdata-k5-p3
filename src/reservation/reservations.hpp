@@ -29,11 +29,11 @@ class ReservationManager{
     
         bool loadReservationsFromCSV();
         bool saveReservationsToCSV() const;
-    
+        
         int createReservation(const std::string& userId, const std::string& userName, int roomId, 
                             const std::string& checkInDate, const std::string& checkOutDate);
         bool cancelReservation(int reservationId);
-    
+        void processQueueForRoom(int roomId);
         void showUserReservations(const std::string& userId) const;
         void showAllReservations() const; 
     
