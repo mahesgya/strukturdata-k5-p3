@@ -32,11 +32,11 @@ void ReservationQueue::showQueue() const
     {
         const auto &req = temp.front();
         std::cout << nomor++ << ". "
-                  << "  Nama: " << req.userName
-                  << ", RoomID: " << req.roomId
-                  << ", Check-In: " << req.checkInDate
-                  << ", Check-Out: " << req.checkOutDate
-                  << "\n";
+                << "  Nama: " << req.userName
+                << ", RoomID: " << req.roomId
+                << ", Check-In: " << req.checkInDate
+                << ", Check-Out: " << req.checkOutDate
+                << "\n";
         temp.pop();
     }
 }

@@ -5,9 +5,7 @@
 #include <sstream>
 #include <limits>
 
-// Tambahkan instance queue
 ReservationQueue reservationQueue;
-// Di salah satu file .cpp
 ReservationManager reservationManager("data/reservations.csv");
 
 ReservationManager::ReservationManager(const std::string &file)
@@ -58,19 +56,16 @@ bool ReservationManager::loadReservationsFromCSV()
         std::getline(ss, totalHargaStr, ',');
         std::getline(ss, status);
 
-
         Reservation reservation;
-
-            reservation.id = std::stoi(idStr);
-            reservation.name = userName;
-            reservation.roomId = std::stoi(roomIdStr);
-            reservation.userId = userId;
-            reservation.tanggalCheckIn = tanggalCheckIn;
-            reservation.tanggalCheckOut = tanggalCheckOut;
-            reservation.totalHarga = std::stoi(totalHargaStr);
-            reservation.status = status;
-            reservations.push_back(reservation);
-
+        reservation.id = std::stoi(idStr);
+        reservation.name = userName;
+        reservation.roomId = std::stoi(roomIdStr);
+        reservation.userId = userId;
+        reservation.tanggalCheckIn = tanggalCheckIn;
+        reservation.tanggalCheckOut = tanggalCheckOut;
+        reservation.totalHarga = std::stoi(totalHargaStr);
+        reservation.status = status;
+        reservations.push_back(reservation);
     }
 
     file.close();
