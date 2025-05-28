@@ -65,7 +65,6 @@ bool Auth::loadUsersFromFile()
     }
 
     file.close();
-    std::cout << "User database loaded successfully." << std::endl;
     return true;
 }
 

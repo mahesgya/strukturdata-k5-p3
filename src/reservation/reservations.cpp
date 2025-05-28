@@ -1,5 +1,5 @@
 #include "reservations.hpp"
-#include "queue.hpp"
+#include "../queue/queue.hpp"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -44,7 +44,8 @@ bool ReservationManager::loadReservationsFromCSV()
     std::string line;
 
     while (std::getline(file, line))
-    {
+    {   
+        if (line.empty()) continue;
         std::stringstream ss(line);
         std::string idStr, userName, roomIdStr, userId, tanggalCheckIn, tanggalCheckOut, totalHargaStr, status;
 
@@ -55,26 +56,26 @@ bool ReservationManager::loadReservationsFromCSV()
         std::getline(ss, tanggalCheckIn, ',');
         std::getline(ss, tanggalCheckOut, ',');
         std::getline(ss, totalHargaStr, ',');
-        std::getline(ss, status, ',');
+        std::getline(ss, status);
+
 
         Reservation reservation;
-        reservation.id = std::stoi(idStr);
-        reservation.name = userName;
-        reservation.roomId = std::stoi(roomIdStr);
-        reservation.userId = userId;
-        reservation.tanggalCheckIn = tanggalCheckIn;
-        reservation.tanggalCheckOut = tanggalCheckOut;
-        reservation.totalHarga = std::stoi(totalHargaStr);
-        reservation.status = status;
 
-        reservations.push_back(reservation);
+            reservation.id = std::stoi(idStr);
+            reservation.name = userName;
+            reservation.roomId = std::stoi(roomIdStr);
+            reservation.userId = userId;
+            reservation.tanggalCheckIn = tanggalCheckIn;
+            reservation.tanggalCheckOut = tanggalCheckOut;
+            reservation.totalHarga = std::stoi(totalHargaStr);
+            reservation.status = status;
+            reservations.push_back(reservation);
+
     }
 
     file.close();
     return true;
 }
-
-
 
 bool ReservationManager::saveReservationsToCSV() const {
     std::ofstream file(filename);

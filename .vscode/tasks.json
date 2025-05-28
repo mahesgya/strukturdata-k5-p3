@@ -16,6 +16,7 @@
         "src/auth/auth.cpp",
         "src/room/rooms.cpp",
         "src/reservation/reservations.cpp",
+        "src/queue/queue.cpp",
         "src/utils/validator/validator.cpp",
         "src/utils/io_helper/io_helper.cpp",
         "src/utils/uuid_generator/uuid_generator.cpp"

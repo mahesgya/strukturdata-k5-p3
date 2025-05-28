@@ -20,6 +20,8 @@ bool RoomManager::loadRoomsFromCSV() {
     
     std::string line;
     while (getline(file, line)) {  
+        if (line.empty()) continue;
+
         std::stringstream ss(line); 
         std::string id_str, type, price_str, status;
 
@@ -27,15 +29,10 @@ bool RoomManager::loadRoomsFromCSV() {
         getline(ss, type, ',');
         getline(ss, price_str, ',');
         getline(ss, status, ',');
-        
-        try {
-            int id = std::stoi(id_str);
-            int price = std::stoi(price_str);
+        int id = std::stoi(id_str);
+        int price = std::stoi(price_str);
 
-            rooms.push_back({id, type, price, status});
-        } catch (const std::exception& e) {
-            std::cerr << "Error: Format data tidak valid pada baris: " << line << std::endl;
-        }
+        rooms.push_back({id, type, price, status});
     }
     
     file.close();  
