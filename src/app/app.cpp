@@ -144,16 +144,6 @@ void App::handleAdminLogin()
 }
 void App::displayUserMenu(Auth &auth)
 {
-<<<<<<< HEAD
-  IOHelper::cls();
-  std::cout << "=== MENU USER ===" << std::endl;
-  std::cout << "1. Lihat Daftar Kamar" << std::endl;
-  std::cout << "2. Lihat Riwayat Reservasi " << std::endl;
-  std::cout << "3. Buat Reservasi" << std::endl;
-  std::cout << "4. Batalkan Reservasi" << std::endl;
-  std::cout << "5. Logout" << std::endl;
-  std::cout << "Pilihan: ";
-=======
   while (true) {
     IOHelper::cls();
     std::cout << "=== MENU USER ===" << std::endl;
@@ -163,43 +153,10 @@ void App::displayUserMenu(Auth &auth)
     std::cout << "4. Lihat Antrean Reservasi" << std::endl;
     std::cout << "5. Logout" << std::endl;
     std::cout << "Pilihan: ";
->>>>>>> 13b9ee9c8f27e6dfec389f7f6ea2a7a78147f2b1
 
     int choice;
     std::cin >> choice;
 
-<<<<<<< HEAD
-  switch (choice)
-  {
-  case 1:
-    IOHelper::cls();
-    auth.getCurrentUser()->viewRoom();
-    IOHelper::pause();
-    break;
-  case 2:
-    IOHelper::cls();
-    auth.getCurrentUser()->showUserReservations();
-    IOHelper::pause();
-    break;
-  case 3:
-    IOHelper::cls();
-    auth.getCurrentUser()->makeReservation();
-    IOHelper::pause();
-    break;
-  case 4:
-    IOHelper::cls();
-    auth.getCurrentUser()->cancelReservation();
-    IOHelper::pause();
-    break;
-  case 5:
-    std::cout << "Logout berhasil!" << std::endl;
-    displayMainMenu(auth);
-    break;
-  default:
-    std::cout << "Pilihan tidak valid!" << std::endl;
-    IOHelper::pause();
-    break;
-=======
     switch (choice)
     {
     case 1:
@@ -231,7 +188,6 @@ void App::displayUserMenu(Auth &auth)
       IOHelper::pause();
       break;
     }
->>>>>>> 13b9ee9c8f27e6dfec389f7f6ea2a7a78147f2b1
   }
 }
 

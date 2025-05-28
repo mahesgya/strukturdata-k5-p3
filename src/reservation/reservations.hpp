@@ -34,10 +34,10 @@ class ReservationManager{
                             const std::string& checkInDate, const std::string& checkOutDate);
         void cancelReservation(const std::string &userId);
         bool cancelReservation(int reservationId);
-<<<<<<< HEAD
-=======
+
         void processQueueForRoom(int roomId);
->>>>>>> 13b9ee9c8f27e6dfec389f7f6ea2a7a78147f2b1
+        void processQueue();
+        
         void showUserReservations(const std::string& userId) const;
         void showAllReservations() const; 
     
