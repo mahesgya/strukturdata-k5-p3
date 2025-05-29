@@ -3,6 +3,7 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <iomanip>
 
 const std::string QUEUE_FILE_PATH = "data/queue.csv";
 
@@ -20,25 +21,37 @@ void ReservationQueue::saveToFile() const
 
 void ReservationQueue::showQueue() const
 {
-    if (queue.empty())
+     if (queue.empty())
     {
         std::cout << "Antrean kosong.\n";
         return;
     }
-    std::cout << "Daftar antrean reservasi:\n";
+
+    std::cout << "========================= DAFTAR ANTREAN RESERVASI =========================\n";
+    std::cout << "----------------------------------------------------------------------------\n";
+    std::cout << std::left
+              << std::setw(5) << "No"
+              << std::setw(20) << "Nama"
+              << std::setw(10) << "RoomID"
+              << std::setw(15) << "Check-In"
+              << std::setw(15) << "Check-Out" << "\n";
+    std::cout << "----------------------------------------------------------------------------\n";
+
     std::queue<ReservationRequest> temp = queue;
     int nomor = 1;
     while (!temp.empty())
     {
         const auto &req = temp.front();
-        std::cout << nomor++ << ". "
-                << "  Nama: " << req.userName
-                << ", RoomID: " << req.roomId
-                << ", Check-In: " << req.checkInDate
-                << ", Check-Out: " << req.checkOutDate
-                << "\n";
+        std::cout << std::left
+                  << std::setw(5) << nomor++
+                  << std::setw(20) << req.userName
+                  << std::setw(10) << req.roomId
+                  << std::setw(15) << req.checkInDate
+                  << std::setw(15) << req.checkOutDate << "\n";
         temp.pop();
     }
+
+    std::cout << "----------------------------------------------------------------------------\n";
 }
 
 void ReservationQueue::loadFromFile()
@@ -78,7 +91,7 @@ ReservationRequest ReservationQueue::getNextRequest()
         queue.pop();
         return request;
     }
-    return {}; // Return empty request if queue is empty
+    return {}; 
 }
 
 bool ReservationQueue::isEmpty() const

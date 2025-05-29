@@ -2,6 +2,8 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <algorithm>
+#include <iomanip>
 
 
 RoomManager::RoomManager(const std::string& dataFile) : filename(dataFile) {
@@ -63,16 +65,29 @@ void RoomManager::showAllRooms() const {
         return;
     }
     
-    std::cout << "=== DAFTAR KAMAR ===" << std::endl;
-    std::cout << "--------------------------------" << std::endl;
-    std::cout << "ID | Tipe Kamar | Harga | Status" << std::endl;
-    std::cout << "--------------------------------" << std::endl;
-    
-    for (const auto& room : rooms) {
-        std::cout << room.id << " | " << room.type << " | " 
-                  << room.price << " | " << room.status << std::endl;
+    std::vector<Room> sortedRooms = rooms;
+    std::sort(sortedRooms.begin(), sortedRooms.end(), [](const Room& a, const Room& b) {
+        return a.price < b.price;
+    });
+
+    std::cout << "================= DAFTAR KAMAR =================" << std::endl;
+    std::cout << "------------------------------------------------" << std::endl;
+    std::cout << std::left
+              << std::setw(6) << "ID"
+              << std::setw(15) << "Tipe Kamar"
+              << std::setw(10) << "Harga"
+              << std::setw(10) << "Status" << std::endl;
+    std::cout << "------------------------------------------------" << std::endl;
+
+    for (const auto& room : sortedRooms) {
+        std::cout << std::left
+                  << std::setw(6) << room.id
+                  << std::setw(15) << room.type
+                  << std::setw(10) << room.price
+                  << std::setw(10) << room.status << std::endl;
     }
-    std::cout << "--------------------------------" << std::endl;
+
+    std::cout << "------------------------------------------------" << std::endl;
 }
 
 void RoomManager::showAvailableRooms() const{

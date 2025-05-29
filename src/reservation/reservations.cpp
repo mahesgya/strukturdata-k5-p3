@@ -4,6 +4,7 @@
 #include <fstream>
 #include <sstream>
 #include <limits>
+#include <iomanip>
 
 ReservationQueue reservationQueue;
 ReservationManager reservationManager("data/reservations.csv");
@@ -191,16 +192,29 @@ int ReservationManager::createReservation(const std::string& userId,const std::s
 void ReservationManager::showUserReservations(const std::string &userId) const
 {
     bool adaReservasi = false;
-    std::cout << "=== DAFTAR RESERVASI ANDA ===" << std::endl;
-    std::cout << "--------------------------------" << std::endl;
-    std::cout << "ID | ID Kamar | Check In | Check Out | Harga | Status" << std::endl;
-    std::cout << "--------------------------------" << std::endl;
+
+    std::cout << "=========================== DAFTAR RESERVASI ANDA ==========================" << std::endl;
+    std::cout << "----------------------------------------------------------------------------" << std::endl;
+    std::cout << std::left
+              << std::setw(6) << "ID"
+              << std::setw(10) << "Kamar"
+              << std::setw(15) << "Check In"
+              << std::setw(15) << "Check Out"
+              << std::setw(10) << "Harga"
+              << std::setw(10) << "Status" << std::endl;
+    std::cout << "----------------------------------------------------------------------------" << std::endl;
 
     for (const auto &reservation : reservations)
     {
         if (reservation.userId == userId)
         {
-            std::cout << reservation.id << " | " << reservation.roomId << " | " << reservation.tanggalCheckIn << " | " << reservation.tanggalCheckOut << " | " << reservation.totalHarga << " | " << reservation.status << std::endl;
+            std::cout << std::left
+                      << std::setw(6) << reservation.id
+                      << std::setw(10) << reservation.roomId
+                      << std::setw(15) << reservation.tanggalCheckIn
+                      << std::setw(15) << reservation.tanggalCheckOut
+                      << std::setw(10) << reservation.totalHarga
+                      << std::setw(10) << reservation.status << std::endl;
             adaReservasi = true;
         }
     }
@@ -209,7 +223,8 @@ void ReservationManager::showUserReservations(const std::string &userId) const
     {
         std::cout << "Anda tidak memiliki riwayat pemesanan." << std::endl;
     }
-    std::cout << "-----------------------------------------------------" << std::endl;
+
+    std::cout << "----------------------------------------------------------------------------" << std::endl;
 }
 
 void ReservationManager::showAllReservations() const
@@ -220,17 +235,29 @@ void ReservationManager::showAllReservations() const
         return;
     }
 
-    std::cout << "=== DAFTAR RESERVASI ===" << std::endl;
-    std::cout << "--------------------------------" << std::endl;
-    std::cout << "ID | ID Kamar | Check In | Check Out | Harga | Status" << std::endl;
-    std::cout << "--------------------------------" << std::endl;
+    std::cout << "============================= DAFTAR RESERVASI =============================" << std::endl;
+    std::cout << "----------------------------------------------------------------------------" << std::endl;
+    std::cout << std::left
+              << std::setw(6) << "ID"
+              << std::setw(10) << "KamarID"
+              << std::setw(15) << "Check In"
+              << std::setw(15) << "Check Out"
+              << std::setw(10) << "Harga"
+              << std::setw(10) << "Status" << std::endl;
+    std::cout << "----------------------------------------------------------------------------" << std::endl;
 
     for (const auto &reservation : reservations)
     {
-        std::cout << reservation.id << " | " << reservation.roomId << " | " << reservation.tanggalCheckIn << " | " << reservation.tanggalCheckOut << " | " << reservation.totalHarga << " | " << reservation.status << std::endl;
+        std::cout << std::left
+                  << std::setw(6) << reservation.id
+                  << std::setw(10) << reservation.roomId
+                  << std::setw(15) << reservation.tanggalCheckIn
+                  << std::setw(15) << reservation.tanggalCheckOut
+                  << std::setw(10) << reservation.totalHarga
+                  << std::setw(10) << reservation.status << std::endl;
     }
 
-    std::cout << "-----------------------------------------------------" << std::endl;
+    std::cout << "----------------------------------------------------------------------------" << std::endl;
 }
 
 void ReservationManager::cancelReservation(const std::string &userId)
