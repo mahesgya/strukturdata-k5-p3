@@ -195,6 +195,7 @@ void App::displayUserMenu(Auth &auth)
     case 6:
       std::cout << "\nLogout berhasil. Sampai jumpa!\n"
                 << std::endl;
+      displayMainMenu(auth);
       IOHelper::pause();
       return;
     default:
