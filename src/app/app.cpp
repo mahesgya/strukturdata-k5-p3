@@ -10,9 +10,9 @@
 #include "../queue/queue.hpp"
 #include "../reservation/reservations.hpp"
 
-//class ReservationQueue yang didefinisikan di queue.hpp
+// class ReservationQueue yang didefinisikan di queue.hpp
 extern ReservationManager reservationManager;
-extern ReservationQueue reservationQueue; 
+extern ReservationQueue reservationQueue;
 using namespace std;
 
 void App::run()
@@ -61,8 +61,9 @@ void App::displayMainMenu(Auth &auth)
 void App::handleCustomerLogin(Auth &auth)
 {
   std::string phone;
-  
-  if (std::cin.rdbuf()->in_avail() > 0) {
+
+  if (std::cin.rdbuf()->in_avail() > 0)
+  {
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
   }
 
@@ -80,7 +81,8 @@ void App::handleCustomerLogin(Auth &auth)
 
   if (auth.findUserByPhone(phone) == nullptr)
   {
-    std::cout << "Nomor belum terdaftar silahkan mendaftar akun." << "\n" << "Masukkan Nama Anda: ";
+    std::cout << "Nomor belum terdaftar silahkan mendaftar akun." << "\n"
+              << "Masukkan Nama Anda: ";
 
     std::string name;
     std::getline(std::cin, name);
@@ -128,7 +130,7 @@ void App::handleAdminLogin()
   std::cout << "Masukkan password: ";
   std::cin >> password;
 
-  Auth auth; 
+  Auth auth;
   if (auth.loginAdmin(phone, password))
   {
     IOHelper::cls();
@@ -142,18 +144,23 @@ void App::handleAdminLogin()
     IOHelper::pause();
   }
 }
+
 void App::displayUserMenu(Auth &auth)
 {
-  while (true) {
+  while (true)
+  {
     IOHelper::cls();
-    std::cout << "=== MENU USER ===" << std::endl;
-    std::cout << "1. Lihat Daftar Kamar" << std::endl;
-    std::cout << "2. Lihat Riwayat Reservasi " << std::endl;
-    std::cout << "3. Buat Reservasi" << std::endl;
-    std::cout << "4. Batalkan Reservasi" << std::endl;
-    std::cout << "5. Lihat Antrean Reservasi" << std::endl;
-    std::cout << "6. Logout" << std::endl;
-    std::cout << "Pilihan: ";
+    std::cout << "+======================================+" << std::endl;
+    std::cout << "|            MENU UTAMA USER           |" << std::endl;
+    std::cout << "+======================================+" << std::endl;
+    std::cout << "|  1. Lihat Daftar Kamar               |" << std::endl;
+    std::cout << "|  2. Lihat Riwayat Reservasi          |" << std::endl;
+    std::cout << "|  3. Buat Reservasi                   |" << std::endl;
+    std::cout << "|  4. Batalkan Reservasi               |" << std::endl;
+    std::cout << "|  5. Lihat Antrean Reservasi          |" << std::endl;
+    std::cout << "|  6. Logout                           |" << std::endl;
+    std::cout << "+======================================+" << std::endl;
+    std::cout << ">> Masukkan pilihan Anda (1-6): ";
 
     int choice;
     std::cin >> choice;
@@ -186,11 +193,13 @@ void App::displayUserMenu(Auth &auth)
       IOHelper::pause();
       break;
     case 6:
-      std::cout << "Logout berhasil!" << std::endl;
+      std::cout << "\nLogout berhasil. Sampai jumpa!\n"
+                << std::endl;
       IOHelper::pause();
-      return; 
+      return;
     default:
-      std::cout << "Pilihan tidak valid!" << std::endl;
+      std::cout << "\nPilihan tidak valid! Silakan coba lagi.\n"
+                << std::endl;
       IOHelper::pause();
       break;
     }
@@ -200,16 +209,19 @@ void App::displayUserMenu(Auth &auth)
 void App::displayAdminMenu(Auth &auth)
 {
   IOHelper::cls();
-  std::cout << "=== MENU ADMIN ===" << std::endl;
-  std::cout << "1. Lihat Daftar Kamar" << std::endl;
-  std::cout << "2. Tambah Daftar Kamar" << std::endl;
-  std::cout << "3. Edit Daftar Kamar" << std::endl;
-  std::cout << "4. Delete Kamar" << std::endl;
-  std::cout << "5. Lihat Semua Reservasi" << std::endl;
-  std::cout << "6. Lihat Antrean Reservasi" << std::endl;
-  std::cout << "7. Proses 1 Antrean Reservasi Secara Manual" << std::endl;
-  std::cout << "8. Logout" << std::endl;
-  std::cout << "Pilihan: ";
+  std::cout << "+======================================+" << std::endl;
+  std::cout << "|              MENU ADMIN              |" << std::endl;
+  std::cout << "+======================================+" << std::endl;
+  std::cout << "| 1. Lihat Daftar Kamar                |" << std::endl;
+  std::cout << "| 2. Tambah Daftar Kamar               |" << std::endl;
+  std::cout << "| 3. Edit Daftar Kamar                 |" << std::endl;
+  std::cout << "| 4. Delete Kamar                      |" << std::endl;
+  std::cout << "| 5. Lihat Semua Reservasi             |" << std::endl;
+  std::cout << "| 6. Lihat Antrean Reservasi           |" << std::endl;
+  std::cout << "| 7. Proses 1 Antrean Reservasi Manual |" << std::endl;
+  std::cout << "| 8. Logout                            |" << std::endl;
+  std::cout << "+======================================+" << std::endl;
+  std::cout << ">> Masukkan pilihan Anda (1-8): ";
 
   int choice;
   std::cin >> choice;
@@ -246,7 +258,7 @@ void App::displayAdminMenu(Auth &auth)
     reservationQueue.showQueue();
     IOHelper::pause();
     break;
-    case 7:
+  case 7:
     IOHelper::cls();
     int roomId;
     std::cout << "Masukkan nomor kamar yang ingin diproses: ";
@@ -254,15 +266,15 @@ void App::displayAdminMenu(Auth &auth)
     reservationManager.processQueueForRoom(roomId);
     IOHelper::pause();
     break;
-    case 8:
-      std::cout << "Logout berhasil!" << std::endl;
-      displayMainMenu(auth);
-      break;
+  case 8:
+    std::cout << "Logout berhasil!" << std::endl;
+    displayMainMenu(auth);
+    break;
   default:
     std::cout << "Pilihan tidak valid!" << std::endl;
     IOHelper::pause();
     break;
   }
 
-  displayAdminMenu(auth); 
+  displayAdminMenu(auth);
 }
